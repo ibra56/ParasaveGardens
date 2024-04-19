@@ -3,6 +3,6 @@ user is farmer or buyer or admin.
 on user creation, fetch location and make step by step selection of area.
 
 locations can be picked from db which shall be manually updated by admin usi API from NIRA/URA
-
+j
 store the location in addresses, with the contact information.
 
