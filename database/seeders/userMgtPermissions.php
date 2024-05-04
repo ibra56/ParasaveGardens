@@ -26,6 +26,9 @@ class userMgtPermissions extends Seeder
             'create-roles',
             'edit-roles',
             'delete-roles',
+
+            'create-room-type',
+            'create-room',
         ];
 
         // Create permissions
