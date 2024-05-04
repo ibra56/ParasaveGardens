@@ -28,9 +28,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     
     Route::get('/users/roles', RolesComponent::class)->name('users.roles');
-    // Route::get('/users/farmers', FarmersIndex::class)->name('users.farmers');
-    // Route::get('/users/buyers', BuyersIndex::class)->name('users.buyers');
-    
+   
     Route::fallback(function() {
         return view('pages/utility/404');
     });    
