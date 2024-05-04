@@ -9,10 +9,11 @@
             </div>
             <div class="px-4 sm:px-6 ">
                 @if (auth()->user()->can('create-room'))
-               @livewire('room-management.new-room-modal')
+                    @livewire('room-management.new-room-modal')
                 @endif
             </div>
         </div>
+        @livewire('room-management.rooms-list')
     </div>
 
 </div>

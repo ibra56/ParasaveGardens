@@ -29,7 +29,7 @@ class NewRoomModal extends Component
             'description' => $this->description
         ]);
         
-        noty('success', 'Room created successfully');
+        noty()->addSuccess('Room created successfully');
         $this->newRoomModal_isOpen = false;
     }
     public function render()
