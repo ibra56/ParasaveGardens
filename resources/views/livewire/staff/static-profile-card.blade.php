@@ -1,39 +1,31 @@
-<div wire:poll
-    class="col-span-1 bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700">
+<div wire:poll class="col-span-1 bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700">
     <div>
-        <img class="h-64 mb-4 w-64 rounded shadow-lg" src="{{ $staff->user->profile_photo_url }}" alt="{{ $staff->user->name }}">
+        {{-- <img class="h-64 mb-4 w-64 rounded shadow-lg" src="{{ $staff->user->profile_photo_url }}" alt="{{ $staff->user->name }}"> --}}
 
         <div>
-            <h2 class="text-2xl px-2 font-semibold">{{ $staff->user->name }}</h2>
-            <p class="text-md px-2 text-gray-600 pb-2">{{ $staff->user->email }}</p>
-            <table class="">
-                <tbody class="text-sm font-medium">
-                    <tr>
-                        <td class="px-2 whitespace-nowrap text-md text-gray-600">Gender:</td>
-                        <td class="whitespace-nowrap text-md text-gray-600">
-                            {{ $staff->user->gender == 'm' ? 'Male' : 'Female' }}</td>
-                    </tr>
-                    <tr>
-                        <td class="px-2 whitespace-nowrap text-md text-gray-600">DoB:</td>
-                        <td class="whitespace-nowrap text-md text-gray-600">
-                            {{ $staff->user->date_of_birth ?? 'Na' }}</td>
-                    </tr>
-                    <tr>
-                        <td class="px-2 whitespace-nowrap text-md text-gray-600">Phone:</td>
-                        <td class="whitespace-nowrap text-md text-gray-600">
-                            {{ $staff->user->phone_number ?? 'Na' }}</td>
-                    </tr>
-                    <tr>
-                        <td class="px-2 whitespace-nowrap text-md text-gray-600"></td>
-                        <td class="whitespace-nowrap text-md text-gray-600">
-                            {{ $staff->user->phone_number_two ?? '' }}</td>
-                    </tr>
-                </tbody>
-            </table>
+           
+            <div class="max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg hover:shadow-blue-400">
+                <div class="relative">
+                  <img class="w-full h-48 object-cover" src="{{ $staff->user->profile_photo_url }}" alt="Profile Image">
+                </div>
+                <div class="px-6 py-4">
+                  <div class="text-xl font-semibold text-gray-800">{{ $staff->user->name }}</div>
+                  <p class="text-gray-600">{{ $staff->user->email }}</p>
+                </div>
+                <div class="px-6 ">
+                  <p class=" px-2 py-1 font-medium text-teal-900 ">{{ $staff->user->gender == 'm' ? 'Male' : 'Female' }}</p>
+                  <p class=" px-2  font-medium text-indigo-900  ">{{ $staff->user->date_of_birth ?? 'Na' }}</p>
+                  <p class=" px-2  font-medium text-purple-900  ">{{ $staff->user->phone_number ?? 'Na' }}</p>
+                  <p class=" px-2  font-medium text-purple-900  ">{{ $staff->user->phone_number_two ?? '' }}</p>
+                </div>
+                <div class="px-6 py-4">
+                    @livewire('staff.edit-profile-model', ['staff_id' => $staff->id], key('edit-profile-modal'))
+                </div>
+              </div>
 
         </div>
-        <div class="px-2 py-2">
-            @livewire('staff.edit-profile-model', ['staff_id' => $staff->id], key('edit-profile-modal'))
-        </div>
+        {{-- <div class="px-2 py-2"> --}}
+            {{-- @livewire('staff.edit-profile-model', ['staff_id' => $staff->id], key('edit-profile-modal')) --}}
+        {{-- </div> --}}
     </div>
 </div>

@@ -12,7 +12,7 @@ class EditProfileModel extends Component
     use WithFileUploads;
     public $staff;
     public $profile_picture;
-    public $editProfileModal_isOpen = true;
+    public $editProfileModal_isOpen = false;
 
     public $name;
     public $email;
