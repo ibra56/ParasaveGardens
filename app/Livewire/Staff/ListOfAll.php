@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Staff;
 
+use App\Models\Staff;
 use App\Models\User;
 use Livewire\Attributes\Url;
 use Livewire\Component;
@@ -27,12 +28,15 @@ class ListOfAll extends Component
     public function render()
     {
         return view('livewire.staff.list-of-all',[
-            'staffMembers' => User::withTrashed()->search($this->search)->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')->paginate($this->perPage)
+            // 'staffMembers' => User::withTrashed()->search($this->search)->orderBy($this->orderBy, $this->orderAsc ? 'asc' : 'desc')->paginate($this->perPage)
+            'staffMembers' => Staff::paginate($this->perPage)
         ]);
     }
 
     public function openstaffMemberProfile($staff_id){
+        // dd($staff_id);
         $this->redirect(route('users.profile', ['staff_id' => $staff_id]), navigate:true);
+
     }
 
     public function deselectAll(){

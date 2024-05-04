@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Staff;
 
+use App\Models\Staff;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
@@ -55,6 +56,10 @@ class NewStaffModal extends Component
             'password' => Hash::make('password'),
             'gender' => $this->gender == 'male' ? 'm' : 'f',
             'date_of_birth' => $this->date_of_birth,
+        ]);
+
+        Staff::create([
+            'user_id' => $user->id,
         ]);
 
         if ($this->can_login == false) {
