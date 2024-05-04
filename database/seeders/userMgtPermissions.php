@@ -41,8 +41,8 @@ class userMgtPermissions extends Seeder
 
         // Find a user by email
         $user = User::create([
-            'email' => 'admin@farmlink.com',
-            'name' => 'FarmLink Admin',
+            'email' => 'admin@parasavegardens.com',
+            'name' => 'Parasave Gardens Admin',
             'password' => Hash::make('kali'),
             'email_verified_at' => now(),
         ]);
