@@ -1,26 +1,26 @@
-<div>
+<div wire:poll>
     {{-- Close your eyes. Count to one. That is how long forever feels. --}}
     <div class="overflow-x-auto p-4">
 
 
         <div class="py-4 px-4 flex justify-between  border-b border-slate-200 dark:border-slate-700">
-            <h1 class="text-2xl font-semibold text-slate-800 dark:text-slate-200">Farmers</h1>
+            <h1 class="text-2xl font-semibold text-slate-800 dark:text-slate-200">Staff Members</h1>
             <div class="flex justify-end">
 
 
-                {{-- <div class="relative">
+                <div class="relative mr-4">
                     <input type="text" wire:model.live="search"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Search name or email..." />
-                </div> --}}
+                </div>
 
                 <div class="mr-4">
-                    @if (count($selectedfarmers) > 0)
+                    @if (count($selectedstaffMembers) > 0)
                         {{-- bulk actions --}}
                         <select wire:model="action" wire:confirm="Are you sure?" wire:change="performAction"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                             <option value="">Choose action</option>
-                            <option value="deleteSelectedfarmers">Delete</option>
+                            <option value="deleteselectedstaffMembers">Delete</option>
                         </select>
                     @endif
                 </div>
@@ -29,8 +29,7 @@
                     {{-- per page selection --}}
                     <select wire:model.live="perPage"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-                        <option value="10">10</option>
-                        <option value="25">25</option>
+                        <option value="20">20</option>
                         <option value="50">50</option>
                         <option value="100">100</option>
                         <option value="250">250</option>
@@ -38,6 +37,9 @@
                     </select>
                 </div>
 
+                @can('create-users')
+                    @livewire('staff.new-staff-modal')
+                @endcan
 
             </div>
         </div>
@@ -46,8 +48,8 @@
 
 
         <div>
-            @if (count($selectedfarmers))
-                {{ count($selectedfarmers) }} farmers selected |
+            @if (count($selectedstaffMembers) > 0)
+                {{ count($selectedstaffMembers) }} Staff Members selected |
                 <span wire:click="deselectAll" type="button" class="cursor-pointer text-blue-500">Deselect all</span>
             @endif
         </div>
@@ -79,27 +81,27 @@
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
-                @forelse ($farmers as $farmer)
+                @forelse ($staffMembers as $staffMember)
                     <tr>
                         <td class="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                            <input type="checkbox" class="form-checkbox" wire:model.live="selectedfarmers"
-                                value="{{ $farmer->user->id }}">
+                            <input type="checkbox" class="form-checkbox" wire:model.live="selectedstaffMembers"
+                                value="{{ $staffMember->id }}">
                         </td>
                         <td class="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                             <div class="flex items-center">
                                 <div class="flex-shrink-0 h-10 w-10">
-                                    <img class="h-10 w-10 rounded-full" src="{{ $farmer->user->profile_photo_url }}"
-                                        alt="{{ $farmer->user->name }}">
+                                    <img class="h-10 w-10 rounded-full" src="{{ $staffMember->profile_photo_url }}"
+                                        alt="{{ $staffMember->name }}">
                                 </div>
                                 <div class="ml-2">
-                                    <div class="text-sm font-medium text-gray-900">{{ $farmer->user->name }}</div>
-                                    <div class="text-sm text-gray-500">{{ $farmer->user->email }}</div>
+                                    <div class="text-sm font-medium text-gray-900">{{ $staffMember->name }}</div>
+                                    <div class="text-sm text-gray-500">{{ $staffMember->email }}</div>
                                 </div>
                             </div>
                         </td>
 
                         <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">
-                            @if ($farmer->user->deleted_at == null)
+                            @if ($staffMember->deleted_at == null)
                                 <span
                                     class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                                     Yes
@@ -113,7 +115,7 @@
 
                         </td>
                         <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">
-                            @if ($farmer->user->email_verified_at)
+                            @if ($staffMember->email_verified_at)
                                 <span
                                     class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                                     Verified
@@ -128,8 +130,8 @@
 
                                 @can('view-users')
                                     <x-button wire:loading.attr="disabled"
-                                        wire:target="openfarmerProfile({{ $farmer->user->id }})"
-                                        wire:click="openfarmerProfile({{ $farmer->user->id }})"
+                                        wire:target="openstaffMemberProfile({{ $staffMember->id }})"
+                                        wire:click="openstaffMemberProfile({{ $staffMember->id }})"
                                         class="bg-indigo-500 hover:bg-indigo-600 text-white flex items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-person-vcard" viewBox="0 0 16 16">
@@ -149,14 +151,14 @@
                     </tr>
                 @empty
                     <tr>
-                        <td class="border-t px-6 py-4" colspan="5">No farmers found.</td>
+                        <td class="border-t px-6 py-4" colspan="5">No staffMembers found.</td>
                     </tr>
                 @endforelse
             </tbody>
         </table>
 
         <div>
-            {{ $farmers->links() }}
+            {{ $staffMembers->links() }}
         </div>
     </div>
 </div>
