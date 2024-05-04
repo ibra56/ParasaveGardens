@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataFeedController;
 use App\Http\Controllers\DashboardController;
+use App\Livewire\Staff\ListOfAll as StaffListOfAll;
+use App\Livewire\Staff\StaffProfile;
 use App\Livewire\RoomManagement\NewRoomIndex;
 use App\Livewire\RoomManagement\RoomTypeIndex;
 use App\Livewire\Users\RolesComponent;
@@ -20,6 +22,8 @@ use App\Livewire\Users\RolesComponent;
 */
 
 Route::redirect('/', 'login');
+Route::redirect('/register', 'login');
+
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
@@ -29,6 +33,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     
     Route::get('/users/roles', RolesComponent::class)->name('users.roles');
+    Route::get('/staff', StaffListOfAll::class)->name('users.index');
+    Route::get('/staff/profile/{staff_id}', StaffProfile::class)->name('users.profile');
 
     // Room Management Routes
     Route::get('/rooms/types', RoomTypeIndex::class,)->name('rooms.types');
