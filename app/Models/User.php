@@ -10,7 +10,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
-use use Illuminate\Database\Eloquent\SoftDeletes;
+use  Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {

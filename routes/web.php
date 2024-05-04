@@ -3,9 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataFeedController;
 use App\Http\Controllers\DashboardController;
-use App\Livewire\Users\BuyersIndex;
-use App\Livewire\Users\FarmersIndex;
+use App\Livewire\RoomManagement\NewRoomIndex;
+use App\Livewire\RoomManagement\RoomTypeIndex;
 use App\Livewire\Users\RolesComponent;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     
     Route::get('/users/roles', RolesComponent::class)->name('users.roles');
+
+    // Room Management Routes
+    Route::get('/rooms/types', RoomTypeIndex::class,)->name('rooms.types');
+    Route::get('/rooms/new', NewRoomIndex::class,)->name('rooms.new');
    
     Route::fallback(function() {
         return view('pages/utility/404');
