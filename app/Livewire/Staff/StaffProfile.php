@@ -19,4 +19,10 @@ class StaffProfile extends Component
     {
         return view('livewire.staff.staff-profile');
     }
+    public function navigateToOverview(){
+        $this->redirect(route('users.profile', ['staff_id' => $this->staff->id]), navigate: true);
+    }
+    public function navigateToSecurity(){
+        $this->redirect(route('users.profile.security', ['staff_id' => $this->staff->id]), navigate: true);
+    }
 }
