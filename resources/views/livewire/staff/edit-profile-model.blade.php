@@ -75,7 +75,7 @@
                                 </div>
                             @else
                                 <div class="col-span-6">
-                                    <img src="{{ $sponsor->profile_photo_url }}" class="w-16 h-16">
+                                    <img src="{{ $sponsor->user->profile_photo_url }}" class="w-16 h-16">
                                 </div>
                             @endif
                         </div>

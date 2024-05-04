@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Staff;
 
+use App\Models\Staff;
 use App\Models\User;
 use Livewire\Component;
 
@@ -11,7 +12,7 @@ class StaffProfile extends Component
 
     public function mount($staff_id)
     {
-        $this->staff = User::withTrashed()->find($staff_id);
+        $this->staff = Staff::find($staff_id);
     }
 
     public function render()

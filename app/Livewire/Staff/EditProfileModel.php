@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Staff;
 
+use App\Models\Staff;
 use App\Models\User;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -33,13 +34,13 @@ class EditProfileModel extends Component
 
     public function mount($staff_id)
     {
-        $this->staff = User::withTrashed()->find($staff_id);
-        $this->name = $this->staff->name;
-        $this->email = $this->staff->email;
-        $this->phone_number_one = $this->staff->phone_number;
-        $this->phone_number_two = $this->staff->phone_number_two;
-        $this->gender = $this->staff->gender;
-        $this->date_of_birth = $this->staff->date_of_birth;
+        $this->staff = Staff::find($staff_id);
+        $this->name = $this->staff->user->name;
+        $this->email = $this->staff->user->email;
+        $this->phone_number_one = $this->staff->user->phone_number;
+        $this->phone_number_two = $this->staff->user->phone_number_two;
+        $this->gender = $this->staff->user->gender;
+        $this->date_of_birth = $this->staff->user->date_of_birth;
     }
     public function render()
     {
@@ -69,14 +70,14 @@ class EditProfileModel extends Component
         }
         // dd($profilePicturePath);
 
-        $this->staff->update([
+        $this->staff->user->update([
             'name' => $this->name,
             'email' => $this->email,
             'phone_number' => $this->phone_number_one,
             'phone_number_two' => $this->phone_number_two,
             'gender' => $this->gender == 'm' ? 'm' : 'f',
             'date_of_birth' => $this->date_of_birth,
-            'profile_photo_path' => $profilePicturePath ?? $this->staff->profile_photo_path,
+            'profile_photo_path' => $profilePicturePath
         ]);
 
         $this->closeSponsorsProfileEditModal();

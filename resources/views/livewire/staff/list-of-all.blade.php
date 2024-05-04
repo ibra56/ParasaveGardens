@@ -85,23 +85,23 @@
                     <tr>
                         <td class="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                             <input type="checkbox" class="form-checkbox" wire:model.live="selectedstaffMembers"
-                                value="{{ $staffMember->id }}">
+                                value="{{ $staffMember->user->id }}">
                         </td>
                         <td class="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                             <div class="flex items-center">
                                 <div class="flex-shrink-0 h-10 w-10">
-                                    <img class="h-10 w-10 rounded-full" src="{{ $staffMember->profile_photo_url }}"
-                                        alt="{{ $staffMember->name }}">
+                                    <img class="h-10 w-10 rounded-full" src="{{ $staffMember->user->profile_photo_url }}"
+                                        alt="{{ $staffMember->user->name }}">
                                 </div>
                                 <div class="ml-2">
-                                    <div class="text-sm font-medium text-gray-900">{{ $staffMember->name }}</div>
-                                    <div class="text-sm text-gray-500">{{ $staffMember->email }}</div>
+                                    <div class="text-sm font-medium text-gray-900">{{ $staffMember->user->name }}</div>
+                                    <div class="text-sm text-gray-500">{{ $staffMember->user->email }}</div>
                                 </div>
                             </div>
                         </td>
 
                         <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">
-                            @if ($staffMember->deleted_at == null)
+                            @if ($staffMember->user->deleted_at == null)
                                 <span
                                     class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                                     Yes
@@ -115,7 +115,7 @@
 
                         </td>
                         <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-500">
-                            @if ($staffMember->email_verified_at)
+                            @if ($staffMember->user->email_verified_at)
                                 <span
                                     class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                                     Verified
