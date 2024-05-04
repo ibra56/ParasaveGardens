@@ -19,4 +19,10 @@ class Room extends Model
     {
         return $this->belongsTo(RoomType::class, 'room_type_id');
     }
+
+    public function roomPrice()
+    {
+        return $this->hasOne(RoomPrice::class, 'room_id')->whereNull('deleted_at');
+    }
+ 
 }

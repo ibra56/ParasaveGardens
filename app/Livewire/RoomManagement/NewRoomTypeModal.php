@@ -24,7 +24,7 @@ class NewRoomTypeModal extends Component
             'name' => $this->name,
             'description' => $this->description
         ]);
-        noty('success', 'Room type created successfully');
+        noty()->addSuccess('Room type created successfully');
         $this->newRoomTypeModal_isOpen = false;
        
     }

@@ -66,6 +66,7 @@ class NewStaffModal extends Component
             $user->delete();
         }
         
+        $this->reset(['newStaffModal_isOpen', 'name', 'email', 'phone_number_one', 'phone_number_two', 'can_login', 'gender', 'date_of_birth']);
 
         noty()->addSuccess('New staff added');
     }
