@@ -34,8 +34,8 @@
                 <x-secondary-button wire:click="$set('newRoomTypeModal_isOpen', false)" wire:loading.attr="disabled">
                     {{ __('Cancel') }}
                 </x-secondary-button>
-                <x-button class="ms-3" wire:click="editRoomType" wire:loading.attr="disabled">
-                    {{ __('Edit') }}
+                <x-button class="ms-3" wire:click="createRoomType" wire:loading.attr="disabled">
+                    {{ __('Save') }}
                 </x-button>
             </x-slot>
         </x-slot>
