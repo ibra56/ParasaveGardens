@@ -13,7 +13,7 @@
                 @endif
             </div>
         </div>
-       
+       @livewire('room-management.room-type-list')
 
     </div>
     
