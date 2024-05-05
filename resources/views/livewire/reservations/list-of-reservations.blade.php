@@ -90,6 +90,8 @@
                                     </x-button>
                                 @endif
                                 <x-button wire:click="generatePDF({{ $reservation->id }})">Print</x-button>
+
+                                @livewire('transactions.new-transaction-modal', ['reservation' => $reservation], key('new-transaction-modal' . $reservation->id))
                             </td>
                         </tr>
                     @empty
