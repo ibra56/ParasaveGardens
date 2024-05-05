@@ -14,14 +14,18 @@ class NewReservationForm extends Component
     public $email;
     public $phone;
     public $gender;
-    public $checkin;
-    public $checkout;
     public $reservation_date;
     public $nin;
     public $address;
     public $phone2;
     public $room_price_id;
+    public $checkout_date;
 
+    public function mount(){
+        $this->reservation_date = now()->addHours(3)->format('Y-m-d\TH:i');
+        $this->checkout_date = now()->addHours(3)->addDay()->format('Y-m-d\TH:i');
+
+    }
 
     public function render()
     {
@@ -47,20 +51,28 @@ class NewReservationForm extends Component
 
     public function saveReservation()
     {
-        $customer =  Customer::create([
+        $customer =  Customer::updateOrCreate([
+            'name' => $this->name,
+            'nin' => $this->nin
+        ], [
             'name' => $this->name,
             'email' => $this->email ?? null,
             'phone' => $this->phone ?? null,
             'phone2' => $this->phone2 ?? null,
             'address' => $this->address ?? null,
             'nin' => $this->nin ?? null,
-            'gender' => $this->gender
+            // 'gender' => $this->gender
         ]);
 
         Reservation::create([
             'customer_id' => $customer->id,
-            'staff_id' => Staff::find(auth()->user()->id)->id,
-            'reservation_date' => $this->reservation_date
+            'staff_id' => Staff::where('user_id', auth()->user()->id)->first()->id,
+            'reservation_date' => $this->reservation_date,
+            'room_price_id' => $this->room_price_id,
+            'checkout_date' => $this->checkout_date,
         ]);
+
+        noty()->addSuccess('Reservation created successfully');
+        $this->reset();
     }
 }

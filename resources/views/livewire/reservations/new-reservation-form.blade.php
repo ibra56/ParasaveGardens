@@ -42,8 +42,8 @@
                         class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
                         wire:model.defer="gender">
                         <option value="">Select Gender</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
                     </select>
                     <x-input-error for="gender" class="mt-2" />
                 </div>
@@ -82,14 +82,14 @@
 
                 <div class="col-span-6 ">
                     <x-label for="reservation_date" value="{{ __('Reservation Date') }}" />
-                    <x-input id="reservation_date" type="date" class="mt-1 block w-full"
+                    <x-input id="reservation_date" type="datetime-local" class="mt-1 block w-full"
                         wire:model.defer="reservation_date" />
                     <x-input-error for="reservation_date" class="mt-2" />
                 </div>
 
                 <div class="col-span-6 ">
                     <x-label for="checkout_date" value="{{ __('Checkout Date') }}" />
-                    <x-input id="checkout_date" type="date" class="mt-1 block w-full"
+                    <x-input id="checkout_date" type="datetime-local" class="mt-1 block w-full"
                         wire:model.defer="checkout_date" />
                     <x-input-error for="checkout_date" class="mt-2" />
                 </div>
