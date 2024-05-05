@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataFeedController;
 use App\Http\Controllers\DashboardController;
+use App\Livewire\Finances\FinanceAccounts;
+use App\Livewire\Finances\PaymentsList;
 use App\Livewire\Reservations\ListOfReservations;
 use App\Livewire\Reservations\NewReservationForm;
 use App\Livewire\Staff\ListOfAll as StaffListOfAll;
@@ -45,6 +47,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::get('/reservations', ListOfReservations::class,)->name('reservations.index');
     Route::get('/reservations/new', NewReservationForm::class,)->name('reservations.new');
+
+    Route::get('/finances/payments', PaymentsList::class,)->name('finances.payments');
+    Route::get('/finances/accounts', FinanceAccounts::class,)->name('finances.accounts');
    
     Route::fallback(function() {
         return view('pages/utility/404');
