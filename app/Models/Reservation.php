@@ -34,4 +34,9 @@ class Reservation extends Model
     {
         return $this->belongsTo(RoomPrice::class);
     }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }

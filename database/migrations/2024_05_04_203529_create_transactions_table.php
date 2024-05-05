@@ -16,8 +16,7 @@ return new class extends Migration
             $table->foreignId('customer_id')->constrained('customers');
             $table->foreignId('staff_id')->constrained('staff');
             $table->date('transaction_date');
-            $table->foreignId('payment_method_id')->constrained('payments');
-            // $table->foreignId('reservation_id')->constrained('reservations')->nullable();
+            $table->foreignId('payment_id')->constrained('payments');
             $table->timestamps();
         });
     }

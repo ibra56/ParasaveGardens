@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Staff;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
@@ -48,6 +49,10 @@ class userMgtPermissions extends Seeder
             'name' => 'Parasave Gardens Admin',
             'password' => Hash::make('kali'),
             'email_verified_at' => now(),
+        ]);
+
+        Staff::create([
+            'user_id' => $user->id
         ]);
 
         // Assign the role to the user

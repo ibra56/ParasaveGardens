@@ -11,7 +11,7 @@ class ListOfReservations extends Component
     public function render()
     {
         return view('livewire.reservations.list-of-reservations', [
-            'reservations' => Reservation::all()
+            'reservations' => Reservation::orderBy('created_at', 'desc')->get(),
         ]);
     }
 
