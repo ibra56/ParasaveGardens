@@ -18,6 +18,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserMgtPermissions::class,
             DashboardTableSeeder::class,
+
+            ExpenseCategorySeeders::class,
+            ExpenseItemsSeeder::class,
         ]);
     }
 }

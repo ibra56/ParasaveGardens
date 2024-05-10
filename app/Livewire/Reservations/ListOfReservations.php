@@ -3,8 +3,8 @@
 namespace App\Livewire\Reservations;
 
 use App\Models\Reservation;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Livewire\Component;
-use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class ListOfReservations extends Component
 {
@@ -35,10 +35,13 @@ class ListOfReservations extends Component
         noty()->addSuccess('Checked out successfully');
     }
 
-    public function generatePDF()
+    public function generatePDF($id)
     {
-       
-        $pdf = PDF::loadView('livewire.downloads.print-reservation');
 
-        return $pdf->stream('report.pdf', array('Attachment' => 0));    }
+       redirect(route('reservations.print', ['reservation_id' => $id]));
+
+        
+    }
+
+
 }

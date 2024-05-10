@@ -44,9 +44,9 @@
                         <th
                             class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                             Customer</th>
-                        <th
+                        {{-- <th
                             class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                            Staff Name</th>
+                            Staff Name</th> --}}
                         <th
                             class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                             Dates</th>
@@ -64,20 +64,21 @@
                             {{-- <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->id }}</td> --}}
                             <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->customer->name }} <br>
                                 {{ $reservation->customer->email ?? 'N/A' }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->staff->user->name }}</td>
+                            {{-- <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->staff->user->name }}</td> --}}
                             <td class="px-6 py-4 whitespace-nowrap ">
-                                <span class="bg-yellow-400 text-gray-900 py-0.5 px-1 rounded text-xs">{{ $reservation->reservation_date ?? 'N/A' }}</span>
+                                <span
+                                    class="bg-yellow-400 text-gray-900 py-0.5 px-1 rounded text-xs">{{ $reservation->reservation_date ?? 'N/A' }}</span>
                                 <br>
-                                <span class="bg-green-400 text-gray-900 py-0.5 px-1 rounded text-xs">{{ $reservation->checkin_date ?? 'N/A' }}</span>
+                                <span
+                                    class="bg-green-400 text-gray-900 py-0.5 px-1 rounded text-xs">{{ $reservation->checkin_date ?? 'N/A' }}</span>
                                 <br>
-                                <span class="bg-blue-400 text-gray-900 py-0.5 px-1 rounded text-xs">{{ $reservation->checkout_date ?? 'N/A' }}</span>
+                                <span
+                                    class="bg-blue-400 text-gray-900 py-0.5 px-1 rounded text-xs">{{ $reservation->checkout_date ?? 'N/A' }}</span>
                             </td>
-                            
-
 
                             <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->roomPrice->room->name }} <br>
                                 UGX {{ $reservation->roomPrice->price }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap">
+                            <td class="px-6 py-4 whitespace-nowrap flex space-x-2">
                                 @if ($reservation->checkin_date == null)
                                     <x-button wire:click="checkin({{ $reservation->id }})"
                                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
