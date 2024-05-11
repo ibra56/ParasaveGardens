@@ -37,7 +37,7 @@ class FinancialExpense extends Model
 
     public function financialcategory()
     {
-        return $this->belongsTo(FinancialExpenseCategoryItem::class, 'financial_category_item_id', 'id');
+        return $this->belongsTo(FinancialExpenseCategoryItem::class, 'expense_category_item_id', 'id');
     }
 
     public function recordedBy()

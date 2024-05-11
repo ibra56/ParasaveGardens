@@ -4,8 +4,8 @@
         <div class="bg-white overflow-x-auto shadow-xl p-4 pb-0">
             <div class="grid grid-cols-2 gap-4">
                 <div class="col-span-1">
-                    <h2 class="text-xl font-bold">Expenses</h2>
-                    <p class="text-sm text-gray-500">List of all expenses</p>
+                    <h2 class="text-xl font-bold">Expense Approvals</h2>
+                    <p class="text-sm text-gray-500">List of all expenses that need approval</p>
                 </div>
 
 
@@ -72,9 +72,6 @@
                             </x-slot>
                         </x-dialog-modal>
                     </div>
-                    {{-- @can('create-expense-transactions')
-                        @livewire('finincials.new-expense-model', [], key('new-expense'))
-                    @endcan --}}
                 </div>
             </div>
             <x-section-border />
@@ -97,10 +94,10 @@
                                 Amount</th>
                             <th scope="col" wire:click="sortBy('date_of_payment')"
                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider  hover:cursor-pointer hover:bg-gray-100">
-                                Date</th>
+                                Request</th>
                             <th scope="col" wire:click="sortBy('created_by')"
                                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider  hover:cursor-pointer hover:bg-gray-100">
-                                Cashier</th>
+                                Actions</th>
                         </tr>
                     </thead>
 
@@ -132,11 +129,20 @@
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         {{-- {{ $expense->currency->symbol }} --}}
                                         {{ $expense->amount }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap capitalize">{{ $expense->date_of_payment }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap flex space-x-2">
+                                    <td class="px-6 py-4 whitespace-nowrap capitalize">
+                                        {{ $expense->date_of_payment }}
                                         <div class="truncate" title="{{ $expense->paidBy->name }}">
                                             {{ substr($expense->paidBy->name, 0, 15) }}{{ strlen($expense->paidBy->name) > 15 ? '...' : '' }}
                                         </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap flex space-x-2">
+                                        <x-button wire:click="approveExpense({{ $expense->id }})">
+                                            Approve
+                                        </x-button>
+
+                                        <x-danger-button wire:click="declineExpense({{ $expense->id }})">
+                                            Decline
+                                        </x-danger-button>
                                     </td>
                                 </tr>
                             @endforeach

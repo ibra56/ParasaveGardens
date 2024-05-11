@@ -8,9 +8,8 @@ use App\Models\FinancialExpenseCategoryItem;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class FinancialsExpensesList extends Component
+class ExpenseRequistionsList extends Component
 {
-
     use WithPagination;
 
     public $filtersModal_isOpen = false;
@@ -22,7 +21,6 @@ class FinancialsExpensesList extends Component
     public $perPage = 100;
     public $sort_by = "created_at";
     public $sort_dir = "desc";
-
 
     public function mount()
     {
@@ -39,10 +37,11 @@ class FinancialsExpensesList extends Component
             $this->sort_dir = "asc";
         }
     }
+
     public function render()
     {
-        return view('livewire.finances.financials-expenses-list', [
-            'expenses' => FinancialExpense::with('financialcategory')->with('paidBy')
+        return view('livewire.finances.expense-requistions-list', [
+            'expenses' => FinancialExpense::onlyTrashed()->with('financialcategory')->with('paidBy')
                 ->whereBetween('created_at', [$this->from_date, $this->to_date])
                 ->when($this->category !== "", function ($query) {
                     return $query->where('expense_category_item_id', $this->category);
@@ -60,5 +59,21 @@ class FinancialsExpensesList extends Component
     public function closeFiltersModal()
     {
         $this->filtersModal_isOpen = false;
+    }
+
+    public function approveExpense($id)
+    {
+        $expense = FinancialExpense::onlyTrashed()->find($id);
+        $expense->approved_by = auth()->user()->id;
+        $expense->save();
+        $expense->restore();
+        noty()->addSuccess('Requisition Approved Successfully');
+    }
+
+    public function declineExpense($id)
+    {
+        $expense = FinancialExpense::onlyTrashed()->find($id);
+        $expense->forceDelete();
+        noty()->addWarning('Requisition Declined Successfully');
     }
 }
