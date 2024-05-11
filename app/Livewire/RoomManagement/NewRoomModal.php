@@ -31,6 +31,7 @@ class NewRoomModal extends Component
         
         noty()->addSuccess('Room created successfully');
         $this->newRoomModal_isOpen = false;
+        $this->reset();
     }
     public function render()
     {
