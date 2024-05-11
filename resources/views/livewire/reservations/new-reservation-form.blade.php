@@ -16,7 +16,7 @@
                     <x-label for="name">{{ __('Name') }} <span class="text-rose-500">*</span> </x-label>
                     <select id="name_select" wire:model.defer="name"
                         class="mt-1 block w-1/2 form-select border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
-                        <option value="">Select Staff</option>
+                        <option value="">Select Customer</option>
                         @foreach ($guests as $guest)
                             <option value="{{ $guest->name }}">{{ $guest->name }}</option>
                         @endforeach

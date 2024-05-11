@@ -6,7 +6,7 @@
 
 
             <div class="py-4 px-4 flex justify-between  border-b border-slate-200 dark:border-slate-700">
-                <h1 class="text-2xl font-semibold text-slate-800 dark:text-slate-200">Reservations</h1>
+                <h1 class="text-2xl font-semibold text-slate-800 dark:text-slate-200">Guests</h1>
                 <div class="flex justify-end">
 
 
@@ -97,7 +97,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="9" class="px-6 py-4 whitespace-nowrap text-center">No reservations found
+                            <td colspan="9" class="px-6 py-4 whitespace-nowrap text-center">No guests found
                             </td>
                         </tr>
                     @endforelse
