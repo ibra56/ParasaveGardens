@@ -15,11 +15,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId('supplier_id')->constrained();
             $table->foreignId('product_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            // $table->foreignId('user_id')->constrained();
+            $table->string('supplier_reference');
             $table->integer('quantity');
             $table->float('price');
             $table->date('need_by_date');
-            $table->boolean('approved')->default(false);
+            $table->date('expected_arrival_date')->nullable();
+            // $table->boolean('approved')->default(false);
             $table->timestamps();
         });
     }

@@ -30,11 +30,13 @@ use App\Livewire\Finances\SuppliersList;
 use App\Livewire\Products\ProductCategoriesIndex;
 use App\Livewire\Products\ProductDetails;
 use App\Livewire\Products\ProductsList;
+use App\Livewire\Purchase\NewPurchaseOrder;
 use App\Livewire\Reservations\CurrentGuests;
 use App\Livewire\Reservations\GuestHistory;
-use App\Livewire\Purchase\RequisitionListIndex;
-use App\Livewire\Purchase\RequistionApprovalsDetails;
-use App\Livewire\Purchase\NewRequisition;
+// use App\Livewire\Purchase\RequisitionListIndex;
+// use App\Livewire\Purchase\RequistionApprovalsDetails;
+// use App\Livewire\Purchase\NewRequisition;
+use App\Livewire\Purchase\PurchaseOrderListIndex;
 
 /*
 |--------------------------------------------------------------------------
@@ -88,9 +90,9 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('expenses/requisitions', ExpenseRequistionsList::class)->name('financials.expenses.requisitions');
 
 
-    Route::get('/products/purchases/requisition', RequisitionListIndex::class)->name('products.purchases.requisitions');
-    Route::get('purchases/requisition/approvals', RequistionApprovalsDetails::class)->name('purchases.requisitions.approvals');
-    Route::get('purchases/requisition/create', NewRequisition::class)->name('purchases.requisitions.create');
+    Route::get('/products/purchases/orders', PurchaseOrderListIndex::class)->name('products.purchases.orders');
+    // Route::get('purchases/requisition/approvals', RequistionApprovalsDetails::class)->name('purchases.requisitions.approvals');
+    Route::get('purchases/purchase-orders/create', NewPurchaseOrder::class)->name('purchases.purchase-orders.create');
     
     Route::fallback(function () {
         return view('pages/utility/404');

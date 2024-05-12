@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Purchase;
 
 use Livewire\Component;
 
@@ -8,6 +8,6 @@ class PurchaseOrderListIndex extends Component
 {
     public function render()
     {
-        return view('livewire.purchase-order-list-index');
+        return view('livewire.purchase.purchase-order-list-index');
     }
 }
