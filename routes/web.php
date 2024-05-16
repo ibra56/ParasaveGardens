@@ -75,7 +75,7 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::get('products/suppliers', SuppliersList::class)->name('products.suppliers');
     Route::get('products/categories', ProductCategoriesIndex::class)->name('products.categories');
-    ======Route::get('products/details/{product_id}', ProductDetails::class)->name('products.details');
+    Route::get('products/details/{product_id}', ProductDetails::class)->name('products.details');
     Route::get('products', ProductsList::class)->name('products.list');
 
     Route::get('expenses/categories', FinancialExpenseCatoriesList::class)->name('expense.categories');
