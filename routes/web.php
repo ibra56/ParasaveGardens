@@ -44,7 +44,7 @@ use App\Livewire\Reservations\GuestHistory;
 |
 */
 
-Route::redirect('/', 'login');
+Route::get('/', function () { return view('website.webindex'); });
 Route::redirect('/register', 'login');
 
 
