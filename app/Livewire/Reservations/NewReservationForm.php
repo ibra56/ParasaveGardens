@@ -72,7 +72,10 @@ class NewReservationForm extends Component
             'checkout_date' => $this->checkout_date,
         ]);
 
+        RoomPrice::where('id', $this->room_price_id)->delete();
+
         noty()->addSuccess('Reservation created successfully');
         $this->reset();
+        $this->mount();
     }
 }

@@ -17,8 +17,8 @@ class NewRoomTypeModal extends Component
     }
     public function createRoomType(){
         $this->validate([
-            'name' => 'required',
-            'description' => 'required',
+            'name' => 'required|string|unique:room_types,name',
+            'description' => 'sometimes|nullable|string',
         ]);
         RoomType::create([
             'name' => $this->name,
@@ -26,6 +26,7 @@ class NewRoomTypeModal extends Component
         ]);
         noty()->addSuccess('Room type created successfully');
         $this->newRoomTypeModal_isOpen = false;
+        $this->reset();
        
     }
     public function render()

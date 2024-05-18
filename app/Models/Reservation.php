@@ -32,7 +32,7 @@ class Reservation extends Model
 
     public function roomPrice()
     {
-        return $this->belongsTo(RoomPrice::class);
+        return $this->belongsTo(RoomPrice::class)->withTrashed();
     }
 
     public function transactions()
