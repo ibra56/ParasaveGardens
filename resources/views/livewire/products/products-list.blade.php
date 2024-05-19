@@ -33,6 +33,10 @@
                                             class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                                             In Stock
                                         </th>
+                                        {{-- <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                                            Price
+                                        </th> --}}
                                         <th scope="col"
                                             class="px-6 py-3 text-left text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                                             Actions
@@ -71,10 +75,18 @@
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
                                                 {{ $productCategory->inventory ? $productCategory->inventory->quantity : 0 }}
+                                                <br> @ UGX
+                                                {{ App\Models\ProductPrice::where('product_id', $productCategory->id)->first() ? number_format(round(App\Models\ProductPrice::where('product_id', $productCategory->id)->first()->price, 2), 2) : 'Na' }}
                                             </td>
+                                            {{-- <td
+                                                class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
+                                                {{ $productCategory->inventory ? $productCategory->inventory->quantity : 0 }} @ 
+                                                {{ App\Models\ProductPrice::where('product_id', $productCategory->id)->first() ? App\Models\ProductPrice::where('product_id', $productCategory->id)->first()->price : 'Na' }}
+                                            </td> --}}
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
                                                 @livewire('products.product-details', ['product' => $productCategory], key($productCategory->id))
+                                                @livewire('products.set-product-price', ['product' => $productCategory], key('set-product-price-' . $productCategory->id))
                                             </td>
                                         </tr>
                                     @empty
