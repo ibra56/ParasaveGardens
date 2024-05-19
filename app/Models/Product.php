@@ -25,5 +25,9 @@ class Product extends Model
         return $this->belongsTo(ProductCategory::class);
     }
 
+    public function inventory(){
+        return $this->hasOne(Inventory::class);
+    }
+
     
 }

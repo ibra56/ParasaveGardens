@@ -214,9 +214,6 @@
                         </div>
                     </li>
 
-
-
-
                     {{-- Reservation Management --}}
                     <li class="px-3 py-2 rounded-sm mb-0.5 last:mb-0 @if (in_array(Request::segment(1), ['reservations'])) {{ 'bg-slate-900' }} @endif"
                         x-data="{ open: {{ in_array(Request::segment(1), ['reservations']) ? 1 : 0 }} }">
@@ -392,7 +389,8 @@
                                     <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate @if (Route::is('products.categories')) {{ '!text-indigo-500' }} @endif"
                                         href="{{ route('products.categories') }}">
                                         <span
-                                            class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Product Categories</span>
+                                            class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Product
+                                            Categories</span>
                                     </a>
                                 </li>
                                 <li class="mb-1 last:mb-0">
@@ -406,7 +404,17 @@
                                     <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate @if (Route::is('products.purchases.orders')) {{ '!text-indigo-500' }} @endif"
                                         href="{{ route('products.purchases.orders') }}">
                                         <span
-                                            class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Purchase Requisitions</span>
+                                            class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Purchase
+                                            Orders</span>
+                                    </a>
+                                </li>
+                                <li class="mb-1 last:mb-0">
+                                    <a class="block text-slate-400 hover:text-slate-200 transition duration-150 truncate @if (Route::is('purchases.purchase-orders.create')) {{ '!text-indigo-500' }} @endif"
+                                        href="{{ route('purchases.purchase-orders.create') }}">
+                                        <span
+                                            class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">New
+                                            Purchase
+                                            Order</span>
                                     </a>
                                 </li>
                             </ul>
@@ -461,8 +469,6 @@
                             </ul>
                         </div>
                     </li>
-
-
 
                 </ul>
             </div>

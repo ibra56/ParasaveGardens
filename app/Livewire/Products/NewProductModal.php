@@ -16,9 +16,9 @@ class NewProductModal extends Component
 
     #[Validate('sometimes|nullable|string')]
     public $description;
-    public $is_sellable;
-    public $is_buyable;
-    public $is_manufacturable;
+    public $is_sellable = false;
+    public $is_buyable = false;
+    public $is_manufacturable = false;
 
     #[Validate('required|exists:product_categories,id')]
     public $category_id;

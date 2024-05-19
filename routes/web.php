@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataFeedController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DownloadsController;
+use App\Http\Controllers\WebsiteController;
 use App\Livewire\Finances\ExpenseCategoryItemsList;
 use App\Livewire\Finances\FinanceAccounts;
 use App\Livewire\Finances\PaymentsList;
@@ -37,6 +38,7 @@ use App\Livewire\Reservations\GuestHistory;
 // use App\Livewire\Purchase\RequistionApprovalsDetails;
 // use App\Livewire\Purchase\NewRequisition;
 use App\Livewire\Purchase\PurchaseOrderListIndex;
+use App\Livewire\Purchase\RecieveOrderForm;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,7 +51,12 @@ use App\Livewire\Purchase\PurchaseOrderListIndex;
 |
 */
 
-Route::redirect('/', 'login');
+Route::get('/', [WebsiteController::class, 'homepage'] )->name('homepage');
+Route::get('/about', [WebsiteController::class, 'about'])->name('about');
+Route::get('/contact-us', [WebsiteController::class, 'contact'])->name('contact-us');
+Route::get('/room', [WebsiteController::class, 'webroom'])->name('room');
+Route::get('/blog', [WebsiteController::class, 'blog'])->name('blog');
+Route::get('/gallery', [WebsiteController::class, 'gallery'])->name('gallery');
 Route::redirect('/register', 'login');
 
 
@@ -90,9 +97,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('expenses/requisitions', ExpenseRequistionsList::class)->name('financials.expenses.requisitions');
 
 
-    Route::get('/products/purchases/orders', PurchaseOrderListIndex::class)->name('products.purchases.orders');
+    Route::get('/products/purchase-orders', PurchaseOrderListIndex::class)->name('products.purchases.orders');
     // Route::get('purchases/requisition/approvals', RequistionApprovalsDetails::class)->name('purchases.requisitions.approvals');
-    Route::get('purchases/purchase-orders/create', NewPurchaseOrder::class)->name('purchases.purchase-orders.create');
+    Route::get('/products/purchase-orders/create', NewPurchaseOrder::class)->name('purchases.purchase-orders.create');
+    Route::get('/products/purchase-orders/{po_id}', RecieveOrderForm::class)->name('products.purchases.order.view');
     
     Route::fallback(function () {
         return view('pages/utility/404');
