@@ -1,13 +1,19 @@
 <!-- resources/views/livewire/finances/suppliers-list-table.blade.php -->
 
 <div class="w-full p-4" wire:poll>
-    <div>
-        <div class="flex items-center">
-            <h2 class="text-lg font-bold">Products</h2>
-            <div class="ml-auto">
+    <div class="bg-white shadow overflow-hidden sm:rounded-lg px-4 py-4">
+        <div class="px-4  sm:px-6 px-4 mb-2"></div>
+        <div class="flex items-center justify-between">
+            <div class="px-4 sm:px-6 ">
+                <h3 class="text-lg font-medium leading-6 text-gray-900">Product List</h3>
+                <p class="mt-1 max-w-2xl text-sm text-gray-500">List of all products List</p>
+            </div>
+            <div class="px-4 sm:px-6 ">
+
                 @livewire('products.new-product-modal', key('new-product-category-modal'))
             </div>
         </div>
+    </div>
         <div class="mt-4">
             <div class="flex flex-col">
                 <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -47,7 +53,7 @@
                                     @forelse ($products as $productCategory)
                                         <tr>
                                             <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900 dark:text-slate-100">
+                                                class="px-6 py-4 text-sm font-medium text-slate-900 dark:text-slate-100">
                                                 {{ $productCategory->name }}
                                                 <br>
                                                 <span class="text-sm text-slate-500 dark:text-slate-400">
@@ -55,7 +61,7 @@
                                                 </span>
                                             </td>
                                             <td
-                                                class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
+                                                class="px-6 py-4  text-sm text-slate-500 dark:text-slate-400">
                                                 {{ $productCategory->description }}
                                             </td>
                                             <td class="px-6 py-4 whitespace-nowrap text-sm">
@@ -74,9 +80,8 @@
                                             </td>
                                             <td
                                                 class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">
-                                                {{ $productCategory->inventory ? $productCategory->inventory->quantity : 0 }}
-                                                <br> @ UGX
-                                                {{ App\Models\ProductPrice::where('product_id', $productCategory->id)->first() ? number_format(round(App\Models\ProductPrice::where('product_id', $productCategory->id)->first()->price, 2), 2) : 'Na' }}
+                                                {{ $productCategory->inventory ? $productCategory->inventory->quantity : 0 }} <br> @ UGX
+                                                {{ App\Models\ProductPrice::where('product_id', $productCategory->id)->first() ?  number_format(round(App\Models\ProductPrice::where('product_id', $productCategory->id)->first()->price,2),2) : 'Na' }}
                                             </td>
                                             {{-- <td
                                                 class="px-6 py-4 whitespace-nowrap text-sm text-slate-500 dark:text-slate-400">

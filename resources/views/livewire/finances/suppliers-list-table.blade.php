@@ -1,5 +1,5 @@
 
-<div class="overflow-x-auto" wire:poll>
+<div class="overflow-x-auto mt-6" wire:poll>
     <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-50">
             <tr>

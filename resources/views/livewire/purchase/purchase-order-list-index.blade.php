@@ -1,4 +1,4 @@
-<div>
+<div class="mt-5 px-4">
     {{-- Stop trying to control. --}}
     <div class="bg-white shadow overflow-hidden sm:rounded-lg px-4 py-4">
         <div class="px-4  sm:px-6 px-4 mb-2"></div>
@@ -14,7 +14,8 @@
                 {{-- @endif --}}
             </div>
         </div>
-        <div wire:poll class="mt-2">
+    </div>
+        <div wire:poll class="mt-4 ">
             <table class="min-w-full divide-y divide-gray-200 border">
                 <thead class="bg-gray-50">
                     <tr>
@@ -52,7 +53,7 @@
                                 <br>
                                 {{ $purchaseOrder->supplier->phone }}
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap">
+                            <td class="px-6 py-4">
                                 {{ $purchaseOrder->responsibleStaff->name }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">

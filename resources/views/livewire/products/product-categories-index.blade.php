@@ -1,10 +1,20 @@
 <div class="w-full p-4" wire:poll>
     {{-- To attain knowledge, add things every day; To attain wisdom, subtract things every day. --}}
     <div>
-        <div class="flex items-center">
+        <div class="bg-white shadow overflow-hidden sm:rounded-lg px-4 py-4">
+            <div class="px-4  sm:px-6 px-4 mb-2"></div>
+            <div class="flex items-center justify-between">
+                <div class="px-4 sm:px-6 ">
+                    <h3 class="text-lg font-medium leading-6 text-gray-900">Product Categories</h3>
+                    <p class="mt-1 max-w-2xl text-sm text-gray-500">List of all Product Categories</p>
+                </div>
+                <div class="px-4 sm:px-6 ">
+
+        {{-- <div class="flex items-center">
             <h2 class="text-lg font-bold">Product Categories</h2>
-            <div class="ml-auto">
+            <div class="ml-auto"> --}}
                 @livewire('products.new-product-category-modal' , key('new-product-category-modal'))
+            </div>
             </div>
         </div>
         <div class="mt-4">
