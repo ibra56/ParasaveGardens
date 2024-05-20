@@ -28,6 +28,7 @@ use App\Livewire\Finances\FinancialsExpensesList;
 use App\Livewire\Finances\Incomes as FinancialsIncomes;
 use App\Livewire\Finances\NewExpenseItem;
 use App\Livewire\Finances\SuppliersList;
+use App\Livewire\Pos\CustomerOrdersList;
 use App\Livewire\Products\ProductCategoriesIndex;
 use App\Livewire\Products\ProductDetails;
 use App\Livewire\Products\ProductsList;
@@ -102,6 +103,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/products/purchase-orders/create', NewPurchaseOrder::class)->name('purchases.purchase-orders.create');
     Route::get('/products/purchase-orders/{po_id}', RecieveOrderForm::class)->name('products.purchases.order.view');
     
+    Route::get('/pos/orders', CustomerOrdersList::class)->name('pos.orders');
+
     Route::fallback(function () {
         return view('pages/utility/404');
     });
