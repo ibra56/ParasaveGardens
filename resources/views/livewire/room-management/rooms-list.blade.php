@@ -3,6 +3,9 @@
         <div class="bg-white border mt-6 dark:bg-slate-800 rounded-lg shadow-md overflow-hidden hover:shadow-xl transition duration-300">
             {{-- <img class="w-full h-48 object-cover object-center" src="{{ $room->image_url }}" alt="{{ $room->name }}"> --}}
             <div class="p-6">
+                {{-- @if ($room->image_url)  --}}
+                <img class="w-full h-48 object-cover object-center" src="{{ asset('storage/'.$room->image_path) }}" alt="{{ $room->name }}">
+                {{-- @endif --}}
                 <h2 class="text-xl font-semibold mb-2">{{ $room->name }}</h2>                
                 <p class="text-gray-600 mb-1">{{ $room->description }}</p>
                 <p class="text-gray-600 mb-1"><span class="font-medium">Room Type:</span> {{ $room->roomType->name }}</p>

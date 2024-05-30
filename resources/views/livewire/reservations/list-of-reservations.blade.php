@@ -76,8 +76,8 @@
                                     class="bg-blue-400 text-gray-900 py-0.5 px-1 rounded text-xs">{{ $reservation->checkout_date ?? 'N/A' }}</span>
                             </td>
 
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->roomPrice->room->name }} <br>
-                                UGX {{ $reservation->roomPrice->price }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->roomPrice ? $reservation->roomPrice->room->name : 'N/A' }} <br>
+                                UGX {{ $reservation->roomPrice ? $reservation->roomPrice->price : 'N/A' }}</td>
                             <td class="px-6 py-4 whitespace-nowrap flex space-x-2">
                                 @if ($reservation->checkin_date == null)
                                     <x-button wire:click="checkin({{ $reservation->id }})"

@@ -51,7 +51,7 @@
                                     Room Price
                                 </span>
                                 <br>
-                                UGX {{ $reservation->roomPrice->price }}
+                                UGX {{ $reservation->roomPrice ? $reservation->roomPrice->price : 'N/A' }}
                             </div>
 
                             @php
@@ -61,7 +61,8 @@
                                     : Carbon\Carbon::now();
                                 $totalDays = $checkoutDate->diffInDays($checkinDate);
                                 $totalDays = $totalDays + ($checkoutDate->diffInHours($checkinDate) < 24 ? 1 : 0); // Round up if partial day
-                                $totalPayable = $totalDays * $reservation->roomPrice->price;
+                                $totalPayable = $totalDays * $reservation->roomPrice ? $reservation->roomPrice->price : 0;
+                                
                                 $totalPayments = 0;
                             @endphp
                             <p class="col-span-1 text-center text-gray-900 py-0.5 px-1 rounded bg-gray-300">

@@ -15,7 +15,7 @@
                 <div class="col-md-4 col-sm-6">
                     <div id="serv_hover" class="room">
                         <div class="room_img">
-                            <figure><img src="images/room{{ $room->id }}.jpg" alt="#" /></figure>
+                            <figure><img style="height: 300px" src="{{ asset('storage/'.$room->image_path) }}" alt="interconnect airport cottages" /></figure>
                         </div>
                         <div class="bed_room">
                             <h3>{{ $room->name }}</h3>

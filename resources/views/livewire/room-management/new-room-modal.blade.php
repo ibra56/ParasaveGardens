@@ -6,7 +6,7 @@
             {{ __('Create Room') }}
         </x-slot>
         <x-slot name="content">
-            <x-form-section submit="">
+            <x-form-section submit="" enctype="multipart/form-data">
                 <x-slot name="title">
                     {{ __('New Room') }}
                 </x-slot>
@@ -16,6 +16,12 @@
                 <x-slot name="form">
                     <div class="col-span-6">
                         <x-validation-errors class="mb-4" />
+                    </div>
+                    <div class="col-span-6">
+                        {{-- <img class="w-full h-48 object-cover object-center" src="{{ $image->temporaryUrl() }}" alt="{{ $room->name }}"> --}}
+                        <x-label for="image" value="{{ __('Room Image') }}" />
+                        <input id="image" accept="image/*" type="file" class="mt-1 block w-full" wire:model="image" />
+                        <x-input-error for="image" class="mt-2" />
                     </div>
                     <div class="col-span-6">
                         <x-label for="name" value="{{ __('Room Type') }}" />

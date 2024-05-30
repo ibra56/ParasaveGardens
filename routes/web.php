@@ -40,6 +40,7 @@ use App\Livewire\Reservations\GuestHistory;
 // use App\Livewire\Purchase\NewRequisition;
 use App\Livewire\Purchase\PurchaseOrderListIndex;
 use App\Livewire\Purchase\RecieveOrderForm;
+use App\Http\Controllers\BookingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -104,6 +105,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/products/purchase-orders/{po_id}', RecieveOrderForm::class)->name('products.purchases.order.view');
     
     Route::get('/pos/orders', CustomerOrdersList::class)->name('pos.orders');
+
+    Route::get('/book-room', [BookingController::class, 'showBookingForm'])->name('book.room');
 
     Route::fallback(function () {
         return view('pages/utility/404');

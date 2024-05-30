@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('rooms', function (Blueprint $table) {
             $table->id();
+            $table->string('image_path')->nullable();
             $table->foreignId('room_types_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->string('description');

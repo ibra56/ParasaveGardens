@@ -33,25 +33,7 @@
                 <div class="col-md-5">
                     <div class="book_room">
                         <h1>Book a Room Online</h1>
-                        <form class="book_now">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <span>Arrival</span>
-                                    <img class="date_cua" src="images/date.png">
-                                    <input class="online_book" placeholder="dd/mm/yyyy" type="date"
-                                        name="dd/mm/yyyy">
-                                </div>
-                                <div class="col-md-12">
-                                    <span>Departure</span>
-                                    <img class="date_cua" src="images/date.png">
-                                    <input class="online_book" placeholder="dd/mm/yyyy" type="date"
-                                        name="dd/mm/yyyy">
-                                </div>
-                                <div class="col-md-12">
-                                    <button class="book_btn">Book Now</button>
-                                </div>
-                            </div>
-                        </form>
+                        @livewire('website.reservation-form')
                     </div>
                 </div>
             </div>

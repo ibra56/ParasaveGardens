@@ -14,11 +14,13 @@ return new class extends Migration
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id')->constrained();
-            $table->foreignId('staff_id')->constrained();
-            $table->foreignId('room_price_id')->constrained();
+            $table->foreignId('staff_id')->nullable()->constrained();
+            $table->foreignId('room_price_id')->nullable()->constrained();
             $table->dateTime('reservation_date')->nullable()->default(null);
             $table->dateTime('checkin_date')->nullable()->default(null);
             $table->dateTime('checkout_date')->nullable()->default(null);
+            $table->integer('number_of_people')->nullable()->default(null);
+            $table->integer('number_of_days')->nullable()->default(null);
             $table->timestamps();
             $table->softDeletes();
         });

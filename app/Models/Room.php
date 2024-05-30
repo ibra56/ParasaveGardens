@@ -13,6 +13,7 @@ class Room extends Model
         'room_types_id',
         'name',
         'description',
+        'image_path'
     ];
 
     public function roomType()
@@ -24,5 +25,4 @@ class Room extends Model
     {
         return $this->hasOne(RoomPrice::class, 'room_id')->whereNull('deleted_at');
     }
- 
 }
