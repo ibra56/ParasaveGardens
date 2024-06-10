@@ -20,6 +20,7 @@ class Reservation extends Model
         'checkout_date',
         'number_of_people',
         'number_of_days',
+        'custom_price'
         
     ];
 

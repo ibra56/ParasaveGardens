@@ -108,19 +108,18 @@
                 </div>
                 @if ($room_price_id != null)
                     <div class="col-span-6">
-                       {{-- {{$room->room->roomPrice}} --}}
-                       {{-- wire:model.change="updatedRoomPriceId({{$room->id}})" --}}
                         <x-label for="room_price" value="{{ __('Room Price') }}" />
                         <x-input id="room_price" type="text" wire:model="room_price" class="mt-1 block w-full" wire:change="updatedRoomPriceId({{$room->id}})" readonly />
                     
                     </div>
                 @endif
 
-                {{-- <div class="col-span-6">
-                    <x-label for="room_price" value="{{ __('Room Price') }}" />
-                    <x-input id="room_price" type="text" class="mt-1 block w-full" wire:model="updatedRoomPriceId({{$room->id}})" readonly wire:live />
+                <div class="col-span-6">
+                    <x-label for="custom_price" value="{{ __('Custom Price') }}" />
+                    <x-input id="custom_price" type="number" class="mt-1 block w-full" wire:model.defer="custom_price" />
+                    <x-input-error for="custom_price" class="mt-2" />
                 </div>
-                --}}
+
                 <div class="col-span-6">
                     <x-label for="number_of_days" value="{{ __('Number of Days') }}" />
                     <x-input id="number_of_days" type="number" class="mt-1 block w-full" wire:model.defer="number_of_days" />

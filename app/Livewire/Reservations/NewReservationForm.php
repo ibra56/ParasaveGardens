@@ -26,6 +26,7 @@ class NewReservationForm extends Component
     public $room_price;
     public $selectedRoom;
     public $roomPrice;
+    public $custom_price;
 
     public function mount(){
         $this->reservation_date = now()->addHours(3)->format('Y-m-d\TH:i');
@@ -91,9 +92,10 @@ class NewReservationForm extends Component
             'checkout_date' => $this->checkout_date,
             'number_of_people' => $this->number_of_people,
             'number_of_days' => $this->number_of_days,
+            'custom_price' => $this->custom_price ?? null
         ]);
-        $this->selectedRoom = RoomPrice::find($this->room_price_id);
-        dd($this->selectedRoom);
+        // $this->selectedRoom = RoomPrice::find($this->room_price_id);
+        // dd($this->selectedRoom);
 
         RoomPrice::where('id', $this->room_price_id)->delete();
     
