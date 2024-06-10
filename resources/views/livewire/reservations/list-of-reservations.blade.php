@@ -77,7 +77,15 @@
                             </td>
 
                             <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->roomPrice ? $reservation->roomPrice->room->name : 'N/A' }} <br>
-                                UGX {{ $reservation->roomPrice ? $reservation->roomPrice->price : 'N/A' }}</td>
+                                @if ($reservation->custom_price == null)
+                                    {{ $reservation->currency ? $reservation->currency->code : 'N/A'}}
+                                    {{ $reservation->roomPrice ? $reservation->roomPrice->price : 'N/A' }}
+                                @else
+                                    {{ $reservation->currency ? $reservation->currency->code : 'N/A'}}
+                                    {{ $reservation->custom_price ? $reservation->custom_price : 'N/A' }}
+                                    
+                                @endif
+                                {{-- {{ $reservation->currency ? $reservation->currency->code : 'N/A'}} {{ $reservation->roomPrice ? $reservation->roomPrice->price : 'N/A' }}</td> --}}
                             <td class="px-6 py-4 whitespace-nowrap flex space-x-2">
                                 @if ($reservation->checkin_date == null)
                                     <x-button wire:click="checkin({{ $reservation->id }})"

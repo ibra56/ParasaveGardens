@@ -7,6 +7,7 @@ use App\Models\Reservation;
 use App\Models\RoomPrice;
 use App\Models\Staff;
 use Livewire\Component;
+use App\Models\Currency;
 
 class NewReservationForm extends Component
 {
@@ -27,11 +28,14 @@ class NewReservationForm extends Component
     public $selectedRoom;
     public $roomPrice;
     public $custom_price;
+    public $currencies;
+    public $currency_id;
 
     public function mount(){
         $this->reservation_date = now()->addHours(3)->format('Y-m-d\TH:i');
         $this->checkout_date = now()->addHours(3)->addDay()->format('Y-m-d\TH:i');
         $this->rooms = RoomPrice::with('room')->get();
+        $this->currencies = Currency::all();
         // the room price is the price of the room selected
         // $this->room_price = $this->rooms->first()->price;
         
@@ -47,9 +51,12 @@ class NewReservationForm extends Component
 
     public function render()
     {
+       
         return view('livewire.reservations.new-reservation-form', [
             'guests' => Customer::all(),
             'rooms' => RoomPrice::all(),
+            // 'currencies' => Currency::all(),
+            
             
             
         ]);
@@ -88,14 +95,14 @@ class NewReservationForm extends Component
             'customer_id' => $customer->id,
             'staff_id' => Staff::where('user_id', auth()->user()->id)->first()->id,
             'reservation_date' => $this->reservation_date,
+            'currency_id' => $this->currency_id,
             'room_price_id' => $this->room_price_id,
             'checkout_date' => $this->checkout_date,
             'number_of_people' => $this->number_of_people,
             'number_of_days' => $this->number_of_days,
             'custom_price' => $this->custom_price ?? null
         ]);
-        // $this->selectedRoom = RoomPrice::find($this->room_price_id);
-        // dd($this->selectedRoom);
+        
 
         RoomPrice::where('id', $this->room_price_id)->delete();
     

@@ -93,6 +93,18 @@
                         wire:model.defer="checkout_date" />
                     <x-input-error for="checkout_date" class="mt-2" />
                 </div>
+                <div class="col-span-6">
+                    <x-label for="currency" value="{{ __('Currency') }}" />
+                    <select id="currency"
+                        class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
+                        wire:model.defer="currency_id">
+                        <option value="">Select Currency</option>
+                        @foreach ($currencies as $currency)
+                        <option value="{{ $currency->id }}">{{ $currency->code }}</option>
+                    @endforeach
+                    </select>
+                    <x-input-error for="currency_id" class="mt-2" />
+                </div>
 
                 <div class="col-span-6">
                     <x-label for="room_price_id" value="{{ __('Room') }}" />

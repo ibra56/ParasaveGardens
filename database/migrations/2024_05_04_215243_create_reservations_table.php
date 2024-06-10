@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('customer_id')->constrained();
             $table->foreignId('staff_id')->nullable()->constrained();
+            $table->foreignId('currency_id')->nullable()->constrained();
             $table->foreignId('room_price_id')->nullable()->constrained();
             $table->decimal('custom_price', 10, 2)->nullable();
             $table->dateTime('reservation_date')->nullable()->default(null);

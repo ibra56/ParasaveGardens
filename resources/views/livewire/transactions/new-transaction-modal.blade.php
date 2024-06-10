@@ -1,12 +1,11 @@
 <div>
-    {{-- Success is as dangerous as failure. --}}
     <x-button class="mr-3" wire:click="openNewTransactionModal" wire:loading.attr="disabled">
         New Transaction
     </x-button>
 
     <x-dialog-modal wire:model="newTransactionModal_isOpen">
         <x-slot name="title">
-            {{-- {{ __('New Transaction') }} --}}
+            {{ __('New Payment Transaction') }}
         </x-slot>
 
         <x-slot name="content">
@@ -21,7 +20,6 @@
 
                 <x-slot name="form">
                     <div class="col-span-6 grid grid-cols-12 gap-4">
-
                         <div class="col-span-12 grid grid-cols-3 gap-4">
                             <div class="col-span-1">
                                 <span class="bg-blue-500 text-white py-0.5 px-1 rounded text-xs">
@@ -51,7 +49,14 @@
                                     Room Price
                                 </span>
                                 <br>
-                                UGX {{ $reservation->roomPrice ? $reservation->roomPrice->price : 'N/A' }}
+                                {{ $reservation->currency ? $reservation->currency->code : 'N/A'}}
+                                @if ($reservation->custom_price == null)
+                                {{ $reservation->roomPrice ? $reservation->roomPrice->price : 'N/A' }}
+                                @else
+                                {{ $reservation->custom_price ? $reservation->custom_price : 'N/A' }} 
+                                @endif
+                               
+
                             </div>
 
                             @php
@@ -61,7 +66,12 @@
                                     : Carbon\Carbon::now();
                                 $totalDays = $checkoutDate->diffInDays($checkinDate);
                                 $totalDays = $totalDays + ($checkoutDate->diffInHours($checkinDate) < 24 ? 1 : 0); // Round up if partial day
-                                $totalPayable = $totalDays * $reservation->roomPrice ? $reservation->roomPrice->price : 0;
+                                if ($reservation->custom_price == null)
+                                $totalPayable = $totalDays * ($reservation->roomPrice ? $reservation->roomPrice->price : 0);
+                                else{
+                                    $totalPayable = $totalDays * ($reservation->custom_price ? $reservation->custom_price : 0);
+                                }
+                                
                                 
                                 $totalPayments = 0;
                             @endphp
@@ -88,7 +98,7 @@
                                 @endphp
                             </div>
                             <div class="col-span-3 text-center text-gray-900 py-0.5 px-1 rounded bg-gray-300 font-bold">
-                                Total Payable: UGX {{ $totalPayable }}
+                                Total Payable: {{ $reservation->currency ? $reservation->currency->code : 'N/A'}} {{ $totalPayable }}
                             </div>
                         </div>
 
@@ -107,21 +117,16 @@
                             </div>
 
                             <div class="col-span-6">
-                                <x-label for="payment_amount" value="{{ __('Amount (UGX)') }}" />
-                                <x-input id="payment_amount" type="number" min="0" step='1000'
+                                <x-label for="payment_amount" value="{{ __('Amount ({{ $reservation->currency ? $reservation->currency->code : 'N/A'}})') }}" />
+                                <x-input id="payment_amount" type="number" min="0" step="1000"
                                     max="{{ $totalPayable }}" class="mt-1 block w-full"
                                     wire:model.defer="payment_amount" />
                                 <x-input-error for="payment_amount" class="mt-2" />
                             </div>
                         @endif
-
-
                     </div>
                 </x-slot>
-
-
             </x-form-section>
-
         </x-slot>
 
         <x-slot name="footer">
@@ -133,9 +138,6 @@
                     {{ __('Save') }}
                 </x-button>
             @endif
-
         </x-slot>
-
-
     </x-dialog-modal>
 </div>

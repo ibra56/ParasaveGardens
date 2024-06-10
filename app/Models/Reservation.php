@@ -14,6 +14,7 @@ class Reservation extends Model
     protected $fillable = [
         'customer_id',
         'staff_id',
+        'currency_id',
         'room_price_id',
         'reservation_date',
         'checkin_date',
@@ -42,5 +43,9 @@ class Reservation extends Model
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
+    }
+    public function currency()
+    {
+        return $this->belongsTo(Currency::class);
     }
 }
