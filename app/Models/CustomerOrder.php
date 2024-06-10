@@ -39,5 +39,21 @@ class CustomerOrder extends Model
     public function servedItems(){
         return $this->hasMany(CustomerOrderItem::class)->withTrashed()->where('preparation_status','served');
     }
+
+    public function payments(){
+        return $this->hasMany(CustomerOrderPayment::class);
+    }
+
+    public function getTotalServedAmountAttribute()
+    {
+        return $this->servedItems->sum(function ($item) {
+            return $item->quantity * $item->item_price;
+        });
+    }
+
+    public function getTotalPaidAmountAttribute()
+    {
+        return $this->payments->sum('payment.amount');
+    }
     
 }
