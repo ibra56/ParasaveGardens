@@ -98,14 +98,41 @@
                     <x-label for="room_price_id" value="{{ __('Room') }}" />
                     <select id="room_price_id"
                         class="mt-1 block w-full border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 rounded-md shadow-sm"
-                        wire:model.defer="room_price_id">
+                        wire:model.live="room_price_id">
                         <option value="">Select Room</option>
                         @foreach ($rooms as $room)
-                            <option value="{{ $room->id }}">{{ $room->room->name . ' - ' . $room->room->roomPrice->price  }}</option>
+                            <option value="{{ $room->id }}">{{ $room->room->name }}</option>
                         @endforeach
                     </select>
                     <x-input-error for="room_price_id" class="mt-2" />
                 </div>
+                @if ($room_price_id != null)
+                    <div class="col-span-6">
+                       {{-- {{$room->room->roomPrice}} --}}
+                       {{-- wire:model.change="updatedRoomPriceId({{$room->id}})" --}}
+                        <x-label for="room_price" value="{{ __('Room Price') }}" />
+                        <x-input id="room_price" type="text" wire:model="room_price" class="mt-1 block w-full" wire:change="updatedRoomPriceId({{$room->id}})" readonly />
+                    
+                    </div>
+                @endif
+
+                {{-- <div class="col-span-6">
+                    <x-label for="room_price" value="{{ __('Room Price') }}" />
+                    <x-input id="room_price" type="text" class="mt-1 block w-full" wire:model="updatedRoomPriceId({{$room->id}})" readonly wire:live />
+                </div>
+                --}}
+                <div class="col-span-6">
+                    <x-label for="number_of_days" value="{{ __('Number of Days') }}" />
+                    <x-input id="number_of_days" type="number" class="mt-1 block w-full" wire:model.defer="number_of_days" />
+                    <x-input-error for="number_of_days" class="mt-2" />
+                </div>
+                <div class="col-span-6">
+                    <x-label for="number_of_people" value="{{ __('Number of People') }}" />
+                    <x-input id="number_of_people" type="number" class="mt-1 block w-full"
+                        wire:model.defer="number_of_people" />
+                    <x-input-error for="number_of_people" class="mt-2" />
+                </div>
+
             </div>
 
         </x-slot>

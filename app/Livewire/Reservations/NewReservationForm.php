@@ -20,18 +20,37 @@ class NewReservationForm extends Component
     public $phone2;
     public $room_price_id;
     public $checkout_date;
+    public $number_of_people;   
+    public $number_of_days;
+    public $rooms;
+    public $room_price;
+    public $selectedRoom;
+    public $roomPrice;
 
     public function mount(){
         $this->reservation_date = now()->addHours(3)->format('Y-m-d\TH:i');
         $this->checkout_date = now()->addHours(3)->addDay()->format('Y-m-d\TH:i');
+        $this->rooms = RoomPrice::with('room')->get();
+        // the room price is the price of the room selected
+        // $this->room_price = $this->rooms->first()->price;
+        
+        
+        
 
+    }
+    public function updatedRoomPriceId($value)
+    {
+        $this->roomPrice = RoomPrice::find($value);
+        $this->room_price = $this->roomPrice->price;
     }
 
     public function render()
     {
         return view('livewire.reservations.new-reservation-form', [
             'guests' => Customer::all(),
-            'rooms' => RoomPrice::all()
+            'rooms' => RoomPrice::all(),
+            
+            
         ]);
     }
 
@@ -70,10 +89,15 @@ class NewReservationForm extends Component
             'reservation_date' => $this->reservation_date,
             'room_price_id' => $this->room_price_id,
             'checkout_date' => $this->checkout_date,
+            'number_of_people' => $this->number_of_people,
+            'number_of_days' => $this->number_of_days,
         ]);
+        $this->selectedRoom = RoomPrice::find($this->room_price_id);
+        dd($this->selectedRoom);
 
         RoomPrice::where('id', $this->room_price_id)->delete();
-
+    
+        
         noty()->addSuccess('Reservation created successfully');
         $this->reset();
         $this->mount();

@@ -20,7 +20,7 @@ class ReservationForm extends Component
     {
         return view('livewire.website.reservation-form');
     }
-
+    
     public function openReservationModal(){
         $this->reservationModal_isOpen = true;
     }
