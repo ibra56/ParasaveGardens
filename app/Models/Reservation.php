@@ -18,6 +18,9 @@ class Reservation extends Model
         'reservation_date',
         'checkin_date',
         'checkout_date',
+        'number_of_people',
+        'number_of_days',
+        
     ];
 
     public function customer()

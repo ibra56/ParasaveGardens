@@ -52,6 +52,8 @@ class ReservationForm extends Component
             'reservation_date' => $this->reservation_date,
             'number_of_days' => $this->number_of_days,
         ]);
+
+        // dd($this->name, $this->email, $this->phone, $this->number_of_people, $this->reservation_date, $this->number_of_days);
  
         noty()->addSuccess('Reservation submitted successfully');
         $this->reservationModal_isOpen = false;

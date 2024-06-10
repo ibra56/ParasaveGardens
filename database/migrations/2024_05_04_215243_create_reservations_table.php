@@ -17,10 +17,10 @@ return new class extends Migration
             $table->foreignId('staff_id')->nullable()->constrained();
             $table->foreignId('room_price_id')->nullable()->constrained();
             $table->dateTime('reservation_date')->nullable()->default(null);
-            $table->dateTime('checkin_date')->nullable()->default(null);
-            $table->dateTime('checkout_date')->nullable()->default(null);
-            $table->integer('number_of_people')->nullable()->default(null);
-            $table->integer('number_of_days')->nullable()->default(null);
+            $table->dateTime('checkin_date')->nullable();
+            $table->dateTime('checkout_date')->nullable();
+            $table->integer('number_of_people')->nullable();
+            $table->integer('number_of_days')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
