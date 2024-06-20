@@ -38,9 +38,9 @@
             <table class="min-w-full divide-y divide-gray-200">
                 <thead>
                     <tr>
-                        {{-- <th
+                        <th
                             class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                            ID</th> --}}
+                            ID</th>
                         <th
                             class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                             Customer</th>
@@ -61,7 +61,7 @@
                 <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-900 dark:divide-gray-700">
                     @forelse ($reservations as $reservation)
                         <tr>
-                            {{-- <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->id }}</td> --}}
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->uuid }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->customer->name }} <br>
                                 {{ $reservation->customer->email ?? 'N/A' }}</td>
                             {{-- <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->staff->user->name }}</td> --}}
@@ -76,8 +76,10 @@
                                     class="bg-blue-400 text-gray-900 py-0.5 px-1 rounded text-xs">{{ $reservation->checkout_date ?? 'N/A' }}</span>
                             </td>
 
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->roomPrice->room->name }} <br>
-                                UGX {{ $reservation->roomPrice->price }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                {{ $reservation->room ? $reservation->room->name : 'N/A' }} <br>
+                                {{ $reservation->currency->code }} {{ $reservation->custom_price }}
+                            </td>
                             <td class="px-6 py-4 whitespace-nowrap flex space-x-2">
                                 @if ($reservation->checkin_date == null)
                                     <x-button wire:click="checkin({{ $reservation->id }})"
@@ -97,7 +99,8 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="9" class="px-6 py-4 whitespace-nowrap text-center">No guests found
+                            <td colspan="9" class="px-6 py-4 whitespace-nowrap text-center">
+                                No guests found
                             </td>
                         </tr>
                     @endforelse

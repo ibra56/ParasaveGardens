@@ -33,6 +33,7 @@
 </div> --}}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -44,65 +45,76 @@
             margin: 0;
             padding: 20px;
         }
+
         .container {
             max-width: 800px;
             margin: 0 auto;
         }
+
         .header {
             text-align: center;
             margin-bottom: 20px;
         }
+
         .header h1 {
             font-size: 24px;
             font-weight: bold;
             margin: 5px 0;
         }
+
         .header p {
             font-size: 16px;
             margin: 5px 0;
         }
+
         .details {
             margin-bottom: 20px;
         }
+
         .details p {
             margin: 5px 0;
         }
+
         .transactions {
             border-collapse: collapse;
             width: 100%;
         }
-        .transactions th, .transactions td {
+
+        .transactions th,
+        .transactions td {
             border: 1px solid #ddd;
             padding: 8px;
             text-align: left;
         }
+
         .transactions th {
             background-color: #f2f2f2;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
             <h1>Interconnect Airport Cottages</h1>
             <p>Accommodation</p>
-            <p>Receipt</p>
+            <p>RID: {{ $reservation->uuid }}</p>
         </div>
         <div class="details">
             <p><strong>Reservation Details:</strong></p>
             <p><strong>Guest:</strong> {{ $reservation->customer->name }}</p>
-            <p><strong>Reservation Date:</strong> {{ $reservation->reservation_date }}</p>
-            <p><strong>Check-in Date:</strong> {{ $reservation->checkin_date }}</p>
-            <p><strong>Check-out Date:</strong> {{ $reservation->checkout_date }}</p>
+            <p><strong>Reservation Date:</strong> {{ $reservation->reservation_date ?? 'N/A' }}</p>
+            <p><strong>Check-in Date:</strong> {{ $reservation->checkin_date ?? 'N/A' }}</p>
+            <p><strong>Check-out Date:</strong> {{ $reservation->checkout_date ?? 'N/A' }}</p>
         </div>
         <div class="details">
             <p><strong>Room Details:</strong></p>
-            <p><strong>Room:</strong> {{ $reservation->roomPrice->room->name }}</p>
-            <p><strong>Room Type:</strong> {{ $reservation->roomPrice->room->roomType->name }}</p>
-            <p><strong>Rate:</strong> USD {{ $reservation->roomPrice->price }}</p>
+            <p><strong>Room:</strong> {{ $reservation->room->name }}</p>
+            <p><strong>Room Type:</strong> {{ $reservation->room->roomType->name }}</p>
+            <p><strong>Rate:</strong> {{ $reservation->currency->code }} {{ $reservation->custom_price }}</p>
         </div>
         <div class="transactions">
-            <p><strong>Transaction Details:</strong></p>
+            <p><strong>Payment Details:</strong></p>
             <table>
                 <thead>
                     <tr>
@@ -112,21 +124,31 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($reservation->transactions as $transaction)
+                    @php
+                        $totalPayable = $reservation->custom_price;
+                    @endphp
+                    @forelse ($reservation->transactions as $transaction)
                         <tr>
                             <td>{{ $transaction->transaction_date }}</td>
-                            <td>{{ $transaction->payment->amount }}</td>
+                            <td>{{ $transaction->payment->currency }} {{ $transaction->payment->amount }}</td>
                             <td>{{ $transaction->payment->payment_method }}</td>
+                            @php
+                                $totalPayable = $totalPayable - $transaction->payment->amount;
+                            @endphp
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="3">No payments found</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>
         <div>
             {{-- <p><strong>Total Payable:</strong> UGX {{ $totalPayable }}</p> --}}
-            <p><strong>Total Payable:</strong> UGX 110</p>
+            <p><strong>Total Payable:</strong> {{ $reservation->currency->code }} {{ $totalPayable }}</p>
         </div>
     </div>
 </body>
-</html>
 
+</html>

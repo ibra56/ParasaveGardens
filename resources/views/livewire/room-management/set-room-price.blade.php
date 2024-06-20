@@ -6,7 +6,7 @@
 
         <x-slot name="title">
             {{-- {{ __('Set Price') }} --}}
-        </x-slot>   
+        </x-slot>
 
         <x-slot name="content">
             <x-form-section submit="">
@@ -15,13 +15,14 @@
                 </x-slot>
 
                 <x-slot name="description">
-                    {{ __('Set a price for room: ' . $room->name ) }}
+                    {{ __('Set a price for room: ' . $room->name) }}
                 </x-slot>
 
                 <x-slot name="form">
                     <div class="col-span-6">
                         <x-label for="price" value="{{ __('Price (UGX)') }}" />
-                        <x-input id="price" type="number" class="mt-1 block w-full" wire:model.defer="price" />
+                        <x-input id="price" type="number" class="mt-1 block w-full"
+                            wire:model.live.debounce.500ms="price" />
                         <x-input-error for="price" class="mt-2" />
                     </div>
                 </x-slot>
@@ -30,6 +31,9 @@
         </x-slot>
 
         <x-slot name="footer">
+            @if ($price)
+                <span class="text-green-500">{{ number_format(round($price)) }}</span>
+            @endif
             <x-secondary-button wire:click="closeSetRoomPriceModal" wire:loading.attr="disabled">
                 {{ __('Cancel') }}
             </x-secondary-button>

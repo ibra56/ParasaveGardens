@@ -41,6 +41,7 @@ use App\Livewire\Reservations\GuestHistory;
 use App\Livewire\Purchase\PurchaseOrderListIndex;
 use App\Livewire\Purchase\RecieveOrderForm;
 use App\Http\Controllers\BookingController;
+use App\Livewire\Website\ManageGallery;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,9 +57,11 @@ use App\Http\Controllers\BookingController;
 Route::get('/', [WebsiteController::class, 'homepage'] )->name('homepage');
 Route::get('/about', [WebsiteController::class, 'about'])->name('about');
 Route::get('/contact-us', [WebsiteController::class, 'contact'])->name('contact-us');
+Route::post('/contact-us', [WebsiteController::class, 'postContact'])->name('contact-us.post');
 Route::get('/room', [WebsiteController::class, 'webroom'])->name('room');
-Route::get('/blog', [WebsiteController::class, 'blog'])->name('blog');
+// Route::get('/blog', [WebsiteController::class, 'blog'])->name('blog');
 Route::get('/gallery', [WebsiteController::class, 'gallery'])->name('gallery');
+Route::post('/newsletter', [WebsiteController::class, 'subscribe'])->name('subscribe');
 Route::redirect('/register', 'login');
 
 
@@ -97,6 +100,8 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('expenses/new', NewExpenseItem::class)->name('financials.expenses.new');
     Route::get('expenses', FinancialsExpensesList::class)->name('financials.expenses');
     Route::get('expenses/requisitions', ExpenseRequistionsList::class)->name('financials.expenses.requisitions');
+    
+    Route::get('website/gallery', ManageGallery::class)->name('website.gallery');
 
 
     Route::get('/products/purchase-orders', PurchaseOrderListIndex::class)->name('products.purchases.orders');

@@ -21,9 +21,19 @@ class Reservation extends Model
         'checkout_date',
         'number_of_people',
         'number_of_days',
-        'custom_price'
-        
+        'custom_price',
+        'uuid',
+        'room_id',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->uuid = uniqid();
+        });
+    }
 
     public function customer()
     {
@@ -47,5 +57,9 @@ class Reservation extends Model
     public function currency()
     {
         return $this->belongsTo(Currency::class);
+    }
+
+    public function room(){
+        return $this->belongsTo(Room::class)->withTrashed();
     }
 }
