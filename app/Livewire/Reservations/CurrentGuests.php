@@ -3,6 +3,7 @@
 namespace App\Livewire\Reservations;
 
 use App\Models\Reservation;
+use App\Models\Room;
 use App\Models\RoomPrice;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Livewire\Component;
@@ -21,7 +22,7 @@ class CurrentGuests extends Component
         $reservation = Reservation::find($id);
         $reservation->checkout_date = now()->addHours(3);
         $reservation->save();
-        RoomPrice::where('id', $reservation->room_price_id)->restore();
+        Room::where('id', $reservation->room_id)->restore();
 
         noty()->addSuccess('Checked out successfully');
     }

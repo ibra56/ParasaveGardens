@@ -587,8 +587,10 @@ button {
      margin: 0;
 }
 
+.gallery .gallery_img video,
 .gallery .gallery_img figure img {
      width: 100%;
+     height: 250px;
      transition: all .5s;
 }
 
@@ -596,6 +598,19 @@ button {
      transform: scale(1.2);
 }
 
+.gallery_btn {
+     text-align: center;
+     margin-top: 40px;
+     background-color: black;
+     color: #fff;
+}
+a.gallery_btn{
+     color: #fff;
+     text-decoration: none;
+}
+.gallery_btn:hover{
+     background-color: red;
+}
 
 /** end gallery  section **/
 

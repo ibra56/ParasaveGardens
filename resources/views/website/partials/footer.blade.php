@@ -19,15 +19,16 @@
                     <li class="@if (Route::currentRouteName() == 'about') active @endif"><a href="{{ route('about') }}">About</a></li>
                     <li class="@if (Route::currentRouteName() == 'room') active @endif"><a href="{{ route('room') }}">Our Room</a></li>
                     <li class="@if (Route::currentRouteName() == 'gallery') active @endif"><a href="{{ route('gallery') }}">Gallery</a></li>
-                    <li class="@if (Route::currentRouteName() == 'blog') active @endif"><a href="{{ route('blog') }}">Blog</a></li>
+                    {{-- <li class="@if (Route::currentRouteName() == 'blog') active @endif"><a href="{{ route('blog') }}">Blog</a></li> --}}
                     <li class="@if (Route::currentRouteName() == 'contact-us') active @endif"><a href="{{ route('contact-us') }}">Contact Us</a></li>
                 </ul>
             </div>
             <div class="col-md-4">
                 <h3>News letter</h3>
-                <form class="bottom_form">
-                    <input class="enter" placeholder="Enter your email" type="text"
-                        name="Enter your email">
+                <form class="bottom_form" action="{{route('subscribe')}}" method="post">
+                    @csrf
+                    <input class="enter" placeholder="Enter your email" type="email"
+                        name="email">
                     <button class="sub_btn">subscribe</button>
                 </form>
                 <ul class="social_icon">
