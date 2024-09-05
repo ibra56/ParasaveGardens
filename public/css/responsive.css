@@ -39,7 +39,14 @@
         padding: 5px 0;
     }
 }
-
+@media (max-width: 767px) {
+    .booking_ocline {
+        position: relative;
+        top: auto;
+        transform: none; /* Reset transform */
+        margin-top: 1rem; /* Optional: Add some margin if needed */
+    }
+}
 @media (min-width: 576px) and (max-width: 767px) {
     .header {
         height: 76px;
@@ -142,7 +149,7 @@
     .navigation .navbar-collapse {
         background: #0f1521;
         padding: 20px;
-       margin-top: -5px;
+        margin-top: -5px;
         position: absolute;
         width: 100%;
         margin-right: 20px;

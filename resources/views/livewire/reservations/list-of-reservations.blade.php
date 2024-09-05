@@ -38,21 +38,21 @@
             <table class="min-w-full divide-y divide-gray-200">
                 <thead>
                     <tr>
-                        {{-- <th
+                        <th
                             class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                            ID</th> --}}
+                            ID</th>
                         <th
                             class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                             Customer</th>
-                        {{-- <th
+                        <th
                             class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                            Staff Name</th> --}}
+                            Facts</th>
                         <th
                             class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                             Dates</th>
-                        <th
+                        {{-- <th
                             class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                            Room</th>
+                            Room</th> --}}
                         <th
                             class="px-6 py-3 bg-gray-50 dark:bg-gray-800 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                             Action</th>
@@ -60,10 +60,15 @@
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200 dark:bg-gray-900 dark:divide-gray-700">
                     @forelse ($reservations as $reservation)
-                        <tr>
-                            {{-- <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->id }}</td> --}}
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->customer->name }} <br>
+                        <tr id="{{ $reservation->id }}" key({{ $reservation->uuid }})>
+
+                            <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->uuid }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                {{ $reservation->customer->name }} <br>
                                 {{ $reservation->customer->email ?? 'N/A' }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                Days: {{ $reservation->number_of_days }} <br>
+                                People: {{ $reservation->number_of_people ?? 'N/A' }}</td>
                             {{-- <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->staff->user->name }}</td> --}}
                             <td class="px-6 py-4 whitespace-nowrap ">
                                 <span
@@ -76,29 +81,26 @@
                                     class="bg-blue-400 text-gray-900 py-0.5 px-1 rounded text-xs">{{ $reservation->checkout_date ?? 'N/A' }}</span>
                             </td>
 
-                            <td class="px-6 py-4 whitespace-nowrap">{{ $reservation->roomPrice ? $reservation->roomPrice->room->name : 'N/A' }} <br>
+                            {{-- <td class="px-6 py-4 whitespace-nowrap">
+                                {{ $reservation->roomPrice ? $reservation->roomPrice->room->name : 'N/A' }} <br>
                                 @if ($reservation->custom_price == null)
-                                    {{ $reservation->currency ? $reservation->currency->code : 'N/A'}}
+                                    {{ $reservation->currency ? $reservation->currency->code : 'N/A' }}
                                     {{ $reservation->roomPrice ? $reservation->roomPrice->price : 'N/A' }}
                                 @else
-                                    {{ $reservation->currency ? $reservation->currency->code : 'N/A'}}
+                                    {{ $reservation->currency ? $reservation->currency->code : 'N/A' }}
                                     {{ $reservation->custom_price ? $reservation->custom_price : 'N/A' }}
-                                    
                                 @endif
-                                {{-- {{ $reservation->currency ? $reservation->currency->code : 'N/A'}} {{ $reservation->roomPrice ? $reservation->roomPrice->price : 'N/A' }}</td> --}}
+                            </td> --}}
                             <td class="px-6 py-4 whitespace-nowrap flex space-x-2">
                                 @if ($reservation->checkin_date == null)
-                                    <x-button wire:click="checkin({{ $reservation->id }})"
-                                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                        Check In
-                                    </x-button>
+                                    @livewire('reservations.checkin-modal', ['reservation' => $reservation], key('checkin-modal' . $reservation->id))
                                 @elseif ($reservation->checkout_date == null)
                                     <x-button wire:click="checkout({{ $reservation->id }})"
                                         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                                         Check Out
                                     </x-button>
                                 @endif
-                                <x-button wire:click="generatePDF({{ $reservation->id }})">Print</x-button>
+                                {{-- <x-button wire:click="generatePDF({{ $reservation->id }})">Print</x-button> --}}
 
                                 @livewire('transactions.new-transaction-modal', ['reservation' => $reservation], key('new-transaction-modal' . $reservation->id))
                             </td>

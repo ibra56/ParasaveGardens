@@ -31,7 +31,7 @@
     @include('website.partials.home.gallery')
     <!-- end gallery -->
     <!-- blog -->
-    @include('website.partials.home.blog')
+    {{-- @include('website.partials.home.blog') --}}
     <!-- end blog -->
     <!--  contact -->
     @include('website.partials.contact')

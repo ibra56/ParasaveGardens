@@ -2,11 +2,11 @@
     {{-- Be like water. --}}
     <x-form-section submit="">
         <x-slot name="title">
-            {{ __('New Reservation') }}
+            {{ __('New Check-in') }}
         </x-slot>
 
         <x-slot name="description">
-            {{ __('Create a new reservation.') }}
+            {{ __('Create a new check-in.') }}
         </x-slot>
 
         <x-slot name="form">
@@ -100,8 +100,8 @@
                         wire:model.defer="currency_id">
                         <option value="">Select Currency</option>
                         @foreach ($currencies as $currency)
-                        <option value="{{ $currency->id }}">{{ $currency->code }}</option>
-                    @endforeach
+                            <option value="{{ $currency->id }}">{{ $currency->code }}</option>
+                        @endforeach
                     </select>
                     <x-input-error for="currency_id" class="mt-2" />
                 </div>
@@ -113,28 +113,31 @@
                         wire:model.live="room_price_id">
                         <option value="">Select Room</option>
                         @foreach ($rooms as $room)
-                            <option value="{{ $room->id }}">{{ $room->room->name }}</option>
+                            <option value="{{ $room->id }}">{{ $room->name }}</option>
                         @endforeach
                     </select>
                     <x-input-error for="room_price_id" class="mt-2" />
                 </div>
-                @if ($room_price_id != null)
+                {{-- @if ($room_price_id != null)
                     <div class="col-span-6">
                         <x-label for="room_price" value="{{ __('Room Price') }}" />
-                        <x-input id="room_price" type="text" wire:model="room_price" class="mt-1 block w-full" wire:change="updatedRoomPriceId({{$room->id}})" readonly />
-                    
+                        <x-input id="room_price" type="text" wire:model="room_price" class="mt-1 block w-full"
+                            wire:change="updatedRoomPriceId({{ $room->id }})" readonly />
+
                     </div>
-                @endif
+                @endif --}}
 
                 <div class="col-span-6">
                     <x-label for="custom_price" value="{{ __('Custom Price') }}" />
-                    <x-input id="custom_price" type="number" class="mt-1 block w-full" wire:model.defer="custom_price" />
+                    <x-input id="custom_price" type="number" class="mt-1 block w-full"
+                        wire:model.defer="custom_price" />
                     <x-input-error for="custom_price" class="mt-2" />
                 </div>
 
                 <div class="col-span-6">
                     <x-label for="number_of_days" value="{{ __('Number of Days') }}" />
-                    <x-input id="number_of_days" type="number" class="mt-1 block w-full" wire:model.defer="number_of_days" />
+                    <x-input id="number_of_days" type="number" class="mt-1 block w-full"
+                        wire:model.defer="number_of_days" />
                     <x-input-error for="number_of_days" class="mt-2" />
                 </div>
                 <div class="col-span-6">

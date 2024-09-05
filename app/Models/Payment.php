@@ -14,6 +14,7 @@ class Payment extends Model
         'payment_method',
         'amount',
         'payment_date',
+        'currency',
     ];
 
     public function customer()

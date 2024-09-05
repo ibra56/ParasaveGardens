@@ -7,15 +7,18 @@
         </ol>
         <div class="carousel-inner">
             <div class="carousel-item active">
-                <img class="first-slide" src="images/banner1.jpg" alt="First slide">
+                <img class="first-slide" src="images/8G5A3328.JPG" alt="First slide">
                 <div class="container">
                 </div>
             </div>
             <div class="carousel-item">
-                <img class="second-slide" src="images/banner2.jpg" alt="Second slide">
+                <img class="second-slide" src="images/8G5A3279.JPG" alt="Second slide">
             </div>
             <div class="carousel-item">
-                <img class="third-slide" src="images/banner3.jpg" alt="Third slide">
+                <img class="third-slide" src="images/8G5A3273.JPG" alt="Third slide">
+            </div>
+            <div class="carousel-item">
+                <img class="forth-slide" src="images/8G5A3246.JPG" alt="Forth slide">
             </div>
         </div>
         <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">

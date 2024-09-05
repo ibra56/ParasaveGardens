@@ -23,17 +23,17 @@
                                 <a class="nav-link" href="{{ route('homepage') }}">Home</a>
                             </li>
                             <li class="nav-item @if (Route::currentRouteName() == 'about') active @endif">
-                                <a class="nav-link" href="{{ route('about') }}">About</a>
+                                <a class="nav-link" href="{{ route('about') }}">About Us</a>
                             </li>
                             <li class="nav-item @if (Route::currentRouteName() == 'room') active @endif">
-                                <a class="nav-link" href="{{ route('room') }}">Our room</a>
+                                <a class="nav-link" href="{{ route('room') }}">Our Rooms</a>
                             </li>
                             <li class="nav-item @if (Route::currentRouteName() == 'gallery') active @endif">
                                 <a class="nav-link" href="{{ route('gallery') }}">Gallery</a>
                             </li>
-                            <li class="nav-item @if (Route::currentRouteName() == 'blog') active @endif">
+                            {{-- <li class="nav-item @if (Route::currentRouteName() == 'blog') active @endif">
                                 <a class="nav-link" href="{{ route('blog') }}">Blog</a>
-                            </li>
+                            </li> --}}
                             <li class="nav-item @if (Route::currentRouteName() == 'contact-us') active @endif">
                                 <a class="nav-link" href="{{ route('contact-us') }}">Contact Us</a>
                             </li>

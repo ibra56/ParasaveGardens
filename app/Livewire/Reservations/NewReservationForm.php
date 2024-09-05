@@ -8,6 +8,7 @@ use App\Models\RoomPrice;
 use App\Models\Staff;
 use Livewire\Component;
 use App\Models\Currency;
+use App\Models\Room;
 
 class NewReservationForm extends Component
 {
@@ -21,9 +22,9 @@ class NewReservationForm extends Component
     public $phone2;
     public $room_price_id;
     public $checkout_date;
-    public $number_of_people;   
+    public $number_of_people;
     public $number_of_days;
-    public $rooms;
+    // public $rooms;
     public $room_price;
     public $selectedRoom;
     public $roomPrice;
@@ -31,16 +32,17 @@ class NewReservationForm extends Component
     public $currencies;
     public $currency_id;
 
-    public function mount(){
+    public function mount()
+    {
         $this->reservation_date = now()->addHours(3)->format('Y-m-d\TH:i');
         $this->checkout_date = now()->addHours(3)->addDay()->format('Y-m-d\TH:i');
-        $this->rooms = RoomPrice::with('room')->get();
+        // $this->rooms = Room::with('room')->get();
         $this->currencies = Currency::all();
         // the room price is the price of the room selected
         // $this->room_price = $this->rooms->first()->price;
-        
-        
-        
+
+
+
 
     }
     public function updatedRoomPriceId($value)
@@ -51,14 +53,14 @@ class NewReservationForm extends Component
 
     public function render()
     {
-       
+
         return view('livewire.reservations.new-reservation-form', [
             'guests' => Customer::all(),
-            'rooms' => RoomPrice::all(),
+            'rooms' => Room::all(),
             // 'currencies' => Currency::all(),
-            
-            
-            
+
+
+
         ]);
     }
 
@@ -102,11 +104,11 @@ class NewReservationForm extends Component
             'number_of_days' => $this->number_of_days,
             'custom_price' => $this->custom_price ?? null
         ]);
-        
+
 
         RoomPrice::where('id', $this->room_price_id)->delete();
-    
-        
+
+
         noty()->addSuccess('Reservation created successfully');
         $this->reset();
         $this->mount();

@@ -6,28 +6,33 @@
                 <ul class="conta">
                     <li><i class="fa fa-map-marker" aria-hidden="true"></i> Airport Rd, Kitooro, Entebbe, Kampala
                         (U)</li>
-                    <li><i class="fa fa-mobile" aria-hidden="true"></i> +256 788 239868</li>
-                    <li> <i class="fa fa-envelope" aria-hidden="true"></i><a
-                            href="mailto:info@interconnectairportcottages.info">
-                            info@interconnectairportcottages.info</a></li>
+                    <li><i class="fa fa-mobile" aria-hidden="true"></i> +256 704 573434</li>
+                    <li><i class="fa fa-envelope" aria-hidden="true"></i><a
+                            href="mailto:interconnect.cottages@gmail.com">
+                            interconnect.cottages@gmail.com</a></li>
                 </ul>
             </div>
             <div class="col-md-4">
                 <h3>Menu Link</h3>
                 <ul class="link_menu">
-                    <li class="@if (Route::currentRouteName() == 'homepage') active @endif"><a href="{{ route('homepage') }}">Home</a></li>
-                    <li class="@if (Route::currentRouteName() == 'about') active @endif"><a href="{{ route('about') }}">About</a></li>
-                    <li class="@if (Route::currentRouteName() == 'room') active @endif"><a href="{{ route('room') }}">Our Room</a></li>
-                    <li class="@if (Route::currentRouteName() == 'gallery') active @endif"><a href="{{ route('gallery') }}">Gallery</a></li>
-                    <li class="@if (Route::currentRouteName() == 'blog') active @endif"><a href="{{ route('blog') }}">Blog</a></li>
-                    <li class="@if (Route::currentRouteName() == 'contact-us') active @endif"><a href="{{ route('contact-us') }}">Contact Us</a></li>
+                    <li class="@if (Route::currentRouteName() == 'homepage') active @endif"><a
+                            href="{{ route('homepage') }}">Home</a></li>
+                    <li class="@if (Route::currentRouteName() == 'about') active @endif"><a href="{{ route('about') }}">About</a>
+                    </li>
+                    <li class="@if (Route::currentRouteName() == 'room') active @endif"><a href="{{ route('room') }}">Our
+                            Room</a></li>
+                    <li class="@if (Route::currentRouteName() == 'gallery') active @endif"><a
+                            href="{{ route('gallery') }}">Gallery</a></li>
+                    {{-- <li class="@if (Route::currentRouteName() == 'blog') active @endif"><a href="{{ route('blog') }}">Blog</a></li> --}}
+                    <li class="@if (Route::currentRouteName() == 'contact-us') active @endif"><a
+                            href="{{ route('contact-us') }}">Contact Us</a></li>
                 </ul>
             </div>
             <div class="col-md-4">
                 <h3>News letter</h3>
-                <form class="bottom_form">
-                    <input class="enter" placeholder="Enter your email" type="text"
-                        name="Enter your email">
+                <form class="bottom_form" action="{{ route('subscribe') }}" method="post">
+                    @csrf
+                    <input class="enter" placeholder="Enter your email" type="email" name="email">
                     <button class="sub_btn">subscribe</button>
                 </form>
                 <ul class="social_icon">
@@ -45,10 +50,10 @@
                 <div class="col-md-10 offset-md-1">
 
                     <p>
-                        © {{ date('Y') }} All Rights Reserved by <a
-                            href="{{ route('homepage') }}">Inter Connect Airport Cottages</a>
+                        © {{ date('Y') }} All Rights Reserved by <a href="{{ route('homepage') }}">Inter Connect
+                            Airport Cottages</a>
                         <br><br>
-                        Powered by <a href="https://hollytechsolnz.rf.gd/">Holly Tech Solutions</a>
+                        {{-- Powered by <a href="https://hollytechsolnz.com/">Holly Tech Solutions</a> --}}
                     </p>
 
                 </div>
